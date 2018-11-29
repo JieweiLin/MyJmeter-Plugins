@@ -13,6 +13,7 @@
             <groupId>org.apache.jmeter</groupId>
             <artifactId>ApacheJMeter_core</artifactId>
             <version>LATEST</version>
+            <scope>provided</scope>
             <exclusions>
                 <exclusion>
                     <artifactId>commons-codec</artifactId>
@@ -81,6 +82,7 @@
             <groupId>org.apache.jmeter</groupId>
             <artifactId>jorphan</artifactId>
             <version>LATEST</version>
+            <scope>provided</scope>
             <exclusions>
                 <exclusion>
                     <artifactId>commons-codec</artifactId>
@@ -95,7 +97,6 @@
             <version>2.12.1</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <!-- 配置将依赖包一并打入到项目的 jar 包中 -->
@@ -125,4 +126,10 @@
             </plugin>
         </plugins>
     </build>
+    <developers>
+        <developer>
+            <name>linjw</name>
+            <email>244903063@qq.com</email>
+        </developer>
+    </developers>
 </project>

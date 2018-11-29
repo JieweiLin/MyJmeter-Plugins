@@ -9,6 +9,7 @@
     <version>0.0</version>
     <modules>
         <module>memcache</module>
+        <module>dubbo</module>
     </modules>
     <packaging>pom</packaging>
 
