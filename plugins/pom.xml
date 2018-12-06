@@ -10,6 +10,7 @@
     <modules>
         <module>memcache</module>
         <module>dubbo</module>
+        <module>mns</module>
     </modules>
     <packaging>pom</packaging>
 
