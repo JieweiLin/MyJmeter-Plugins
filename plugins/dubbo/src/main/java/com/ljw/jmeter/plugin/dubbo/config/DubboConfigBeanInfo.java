@@ -61,11 +61,11 @@ public class DubboConfigBeanInfo extends BeanInfoSupport {
             createPropertyGroup("consumer_group", new String[]{DUBBO_TIMEOUT, DUBBO_VERSION, DUBBO_RETRIES, DUBBO_CLUSTER, DUBBO_GROUP, DUBBO_CONNECTIONS, DUBBO_ASYNC, DUBBO_LOADBALANCE});
             p = property(DUBBO_TIMEOUT);
             p.setValue(NOT_UNDEFINED, Boolean.TRUE);
-            p.setValue(DEFAULT, "");
+            p.setValue(DEFAULT, "${dubbo_timeout}");
 
             p = property(DUBBO_VERSION);
             p.setValue(NOT_UNDEFINED, Boolean.TRUE);
-            p.setValue(DEFAULT, "");
+            p.setValue(DEFAULT, "${dubbo_version}");
 
             p = property(DUBBO_RETRIES);
             p.setValue(NOT_UNDEFINED, Boolean.TRUE);
@@ -77,7 +77,7 @@ public class DubboConfigBeanInfo extends BeanInfoSupport {
 
             p = property(DUBBO_GROUP);
             p.setValue(NOT_UNDEFINED, Boolean.TRUE);
-            p.setValue(DEFAULT, "");
+            p.setValue(DEFAULT, "${dubbo_group}");
 
             p = property(DUBBO_CONNECTIONS);
             p.setValue(NOT_UNDEFINED, Boolean.TRUE);
