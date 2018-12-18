@@ -11,6 +11,7 @@
         <module>memcache</module>
         <module>dubbo</module>
         <module>mns</module>
+        <module>redis</module>
     </modules>
     <packaging>pom</packaging>
 
