@@ -2,8 +2,8 @@ package com.ljw.jmeter.plugin.common;
 
 /**
  * @author 林杰炜 linjw
- * @Title TODO 类描述
- * @Description TODO 详细描述
+ * @Title redis命令
+ * @Description redis命令
  * @Copyright 2014-现在 厦门神州鹰掌通家园项目组
  * @date 2018/12/18 17:06
  */
@@ -19,7 +19,8 @@ public enum GetMode {
     SET((byte) 7),
     KEYS((byte) 8),
     TYPE((byte) 9),
-    SMEMBERS((byte)10);
+    SMEMBERS((byte)10),
+    SISMEMBER((byte)11);
     private byte value;
 
     private GetMode(byte value) {

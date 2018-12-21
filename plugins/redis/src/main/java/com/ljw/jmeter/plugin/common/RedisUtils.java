@@ -70,6 +70,11 @@ public class RedisUtils {
                 variables.put(resultVariableNames + "_N", String.valueOf(i-1));
                 line = set.toString();
                 return line;
+            } else if (GetMode.SISMEMBER.equals(getMode)){
+                Boolean b = jedis.sismember(redisKey, parameter);
+                variables.put(resultVariableNames, String.valueOf(b));
+                line = String.valueOf(b);
+                return line;
             }
             if (StringUtils.isBlank(line)){
                 throw new JMeterStopThreadException("End of redis data");
