@@ -49,7 +49,7 @@ public class JsonUtils {
     }
 
     public static String getJson(Object obj) {
-        return JSON.toJSONStringWithDateFormat(obj, "yyyy-MM-dd hh:mm:ss", SerializerFeature.DisableCircularReferenceDetect);
+        return JSON.toJSONStringWithDateFormat(obj, "yyyy-MM-dd HH:mm:ss", SerializerFeature.DisableCircularReferenceDetect);
     }
 
     public static <T> T readValue(String json, Class<? extends T> cls) {
