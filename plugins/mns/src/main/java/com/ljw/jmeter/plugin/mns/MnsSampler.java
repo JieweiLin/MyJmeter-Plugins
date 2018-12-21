@@ -54,7 +54,10 @@ public class MnsSampler extends AbstractSampler implements TestBean, Serializabl
         SampleResult result = new SampleResult();
         result.setSampleLabel(getName());
         result.sampleStart();
-        pushContent = JSONObject.toJSONString(JSONObject.parseObject(pushContent));
+        try {
+            pushContent = JSONObject.toJSONString(JSONObject.parseObject(pushContent));
+        } catch (Exception e) {
+        }
         final JMeterContext context = getThreadContext();
         JMeterVariables variables = context.getVariables();
         String messageId = "";

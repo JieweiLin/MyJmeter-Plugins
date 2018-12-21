@@ -1,5 +1,6 @@
 package com.ljw.jmeter.plugin.ons;
 
+import com.alibaba.fastjson.JSONObject;
 import com.aliyun.openservices.ons.api.Message;
 import com.aliyun.openservices.ons.api.Producer;
 import com.aliyun.openservices.ons.api.SendResult;
@@ -48,6 +49,10 @@ public class OnsSampler extends AbstractSampler implements TestBean, Serializabl
         result.setSampleLabel(getName());
         result.sampleStart();
         result.setSamplerData(toString());
+        try {
+            pushContent = JSONObject.toJSONString(JSONObject.parseObject(pushContent));
+        } catch (Exception e1) {
+        }
         final JMeterVariables variables = getThreadContext().getVariables();
         Producer producer = (Producer) variables.getObject(variableName);
         String messageId = "";
@@ -60,14 +65,14 @@ public class OnsSampler extends AbstractSampler implements TestBean, Serializabl
                 variables.put(resultVariableName, sendResult.getMessageId());
                 result.setResponseData(messageId, "utf-8");
             } else {
-                log.error("投递ONS失败", e);
+                log.error("投递ONS失败");
                 variables.put(resultVariableName, "投递ONS失败");
                 result.setResponseData("投递ONS失败", "utf-8");
             }
         } catch (Exception e1) {
-            log.error("投递ONS失败！", e);
+            log.error("投递ONS失败！", e1);
             variables.put(resultVariableName, "投递ONS失败");
-            result.setResponseData("投递ONS失败", "utf-8");
+            result.setResponseData("投递ONS失败" + e1, "utf-8");
         }
         result.setDataType(SampleResult.TEXT);
         result.setResponseOK();
