@@ -20,6 +20,7 @@ import redis.clients.jedis.Protocol;
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
@@ -55,40 +56,45 @@ public class RedisConfig extends ConfigTestElement implements TestBean, LoopIter
 
     @Override
     public void iterationStart(LoopIterationEvent iterEvent) {
-        JedisPoolConfig config = new JedisPoolConfig();
-        config.setMaxTotal(maxActive);
-        config.setMaxIdle(maxIdle);
-        config.setMinIdle(minIdle);
-        config.setMaxWaitMillis(maxWait);
-        config.setTestOnBorrow(testOnBorrow);
-        config.setTestOnReturn(testOnReturn);
-        config.setTestWhileIdle(testWhileIdle);
-        config.setTimeBetweenEvictionRunsMillis(timeBetweenEvictionRunsMillis);
-        config.setNumTestsPerEvictionRun(numTestsPerEvictionRun);
-        config.setMinEvictableIdleTimeMillis(minEvictableIdleTimeMillis);
-        config.setSoftMinEvictableIdleTimeMillis(softMinEvictableIdleTimeMillis);
-        int port = Protocol.DEFAULT_PORT;
-        if (StringUtils.isNotBlank(this.port)){
-            port = Integer.parseInt(this.port);
-        }
-        int timeout = Protocol.DEFAULT_TIMEOUT;
-        if (StringUtils.isNotBlank(this.timeout)){
-            timeout = Integer.parseInt(this.timeout);
-        }
-        int database = Protocol.DEFAULT_DATABASE;
-        if (StringUtils.isNotBlank(this.database)){
-            database = Integer.parseInt(this.database);
-        }
-        String password = null;
-        if (StringUtils.isNotBlank(this.password)){
-            password = this.password;
-        }
-        this.pool = new JedisPool(config, this.host, port, timeout, password, database);
-        if (pool != null){
-            final JMeterVariables variables = getThreadContext().getVariables();
-            variables.putObject(variableName, this.pool);
-        }else {
-            log.error("init redis pool error");
+        final JMeterVariables variables = getThreadContext().getVariables();
+        if (Objects.isNull(variables.getObject(variableName))){
+            if (log.isDebugEnabled()){
+                log.debug("init redis config");
+            }
+            JedisPoolConfig config = new JedisPoolConfig();
+            config.setMaxTotal(maxActive);
+            config.setMaxIdle(maxIdle);
+            config.setMinIdle(minIdle);
+            config.setMaxWaitMillis(maxWait);
+            config.setTestOnBorrow(testOnBorrow);
+            config.setTestOnReturn(testOnReturn);
+            config.setTestWhileIdle(testWhileIdle);
+            config.setTimeBetweenEvictionRunsMillis(timeBetweenEvictionRunsMillis);
+            config.setNumTestsPerEvictionRun(numTestsPerEvictionRun);
+            config.setMinEvictableIdleTimeMillis(minEvictableIdleTimeMillis);
+            config.setSoftMinEvictableIdleTimeMillis(softMinEvictableIdleTimeMillis);
+            int port = Protocol.DEFAULT_PORT;
+            if (StringUtils.isNotBlank(this.port)){
+                port = Integer.parseInt(this.port);
+            }
+            int timeout = Protocol.DEFAULT_TIMEOUT;
+            if (StringUtils.isNotBlank(this.timeout)){
+                timeout = Integer.parseInt(this.timeout);
+            }
+            int database = Protocol.DEFAULT_DATABASE;
+            if (StringUtils.isNotBlank(this.database)){
+                database = Integer.parseInt(this.database);
+            }
+            String password = null;
+            if (StringUtils.isNotBlank(this.password)){
+                password = this.password;
+            }
+            this.pool = new JedisPool(config, this.host, port, timeout, password, database);
+            if (pool != null){
+                variables.putObject(variableName, this.pool);
+            }else {
+                log.error("init redis pool error");
+            }
         }
     }
 
