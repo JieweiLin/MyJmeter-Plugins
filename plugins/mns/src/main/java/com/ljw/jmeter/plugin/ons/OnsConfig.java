@@ -14,6 +14,7 @@ import org.apache.jmeter.threads.JMeterVariables;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Objects;
 import java.util.Properties;
 
 /**
@@ -34,18 +35,23 @@ public class OnsConfig extends ConfigTestElement implements TestBean, LoopIterat
     @Override
     public void iterationStart(LoopIterationEvent iterEvent) {
         try {
-            Properties properties = new Properties();
-            properties.put(PropertyKeyConst.AccessKey, getAccessKey());
-            properties.put(PropertyKeyConst.SecretKey, getSecretKey());
-            properties.put(PropertyKeyConst.SendMsgTimeoutMillis, getSendMsgTimeout());
-            properties.put(PropertyKeyConst.ONSAddr, getOnsAddr());
-            Producer producer = ONSFactory.createProducer(properties);
-            producer.start();
             final JMeterContext context = getThreadContext();
             JMeterVariables variables = context.getVariables();
-            variables.putObject(variableName, producer);
+            if (Objects.isNull(variables.getObject(variableName))){
+                if (log.isDebugEnabled()){
+                    log.debug("init OnsConfig!");
+                }
+                Properties properties = new Properties();
+                properties.put(PropertyKeyConst.AccessKey, getAccessKey());
+                properties.put(PropertyKeyConst.SecretKey, getSecretKey());
+                properties.put(PropertyKeyConst.SendMsgTimeoutMillis, getSendMsgTimeout());
+                properties.put(PropertyKeyConst.ONSAddr, getOnsAddr());
+                Producer producer = ONSFactory.createProducer(properties);
+                producer.start();
+                variables.putObject(variableName, producer);
+            }
         } catch (Exception e) {
-            log.error("init OnsConfig error!");
+            log.error("init OnsConfig error!", e);
         }
     }
 

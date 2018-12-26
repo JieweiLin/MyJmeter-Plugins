@@ -15,6 +15,8 @@ import org.apache.jmeter.threads.JMeterVariables;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Objects;
+
 /**
  * @author 林杰炜 linjw
  * @Title Mns配置元件
@@ -33,11 +35,16 @@ public class MnsConfig extends ConfigTestElement implements TestBean, LoopIterat
     @Override
     public void iterationStart(LoopIterationEvent iterEvent) {
         try {
-            CloudAccount cloudAccount = new CloudAccount(getAccessKey(), getSecretKey(), getAccountEndpoint());
-            MNSClient client = cloudAccount.getMNSClient();
             final JMeterContext context = getThreadContext();
             JMeterVariables variables = context.getVariables();
-            variables.putObject(variableName, client);
+            if (Objects.isNull(variables.getObject(variableName))){
+                if (log.isDebugEnabled()){
+                    log.debug("init MnsConfig!");
+                }
+                CloudAccount cloudAccount = new CloudAccount(getAccessKey(), getSecretKey(), getAccountEndpoint());
+                MNSClient client = cloudAccount.getMNSClient();
+                variables.putObject(variableName, client);
+            }
         } catch (ServiceException e) {
             log.error("init MnsConfig error", e);
         } catch (ClientException e) {
