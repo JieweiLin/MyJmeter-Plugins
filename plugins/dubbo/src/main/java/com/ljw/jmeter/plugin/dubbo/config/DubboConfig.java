@@ -23,6 +23,7 @@ import org.slf4j.LoggerFactory;
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
@@ -68,70 +69,74 @@ public class DubboConfig extends ConfigTestElement implements TestBean, LoopIter
 
     @Override
     public void iterationStart(LoopIterationEvent iterEvent) {
-        if (log.isDebugEnabled()) {
-            log.debug(toString());
-        }
-        ApplicationConfig application = new ApplicationConfig();
-        application.setName("JMeter-Dubbo");
-        ReferenceConfig reference = new ReferenceConfig();
-        reference.setApplication(application);
-        RegistryConfig registry = null;
-        switch (registryProtocol) {
-            case Constants.REGISTRY_ZOOKEEPER:
-                registry = new RegistryConfig();
-                registry.setProtocol(Constants.REGISTRY_ZOOKEEPER);
-                registry.setAddress(address);
-                reference.setRegistry(registry);
-                reference.setProtocol(rpcProtocol);
-                break;
-            case Constants.REGISTRY_MULTICAST:
-                registry = new RegistryConfig();
-                registry.setProtocol(Constants.REGISTRY_MULTICAST);
-                registry.setAddress(address);
-                reference.setRegistry(registry);
-                reference.setProtocol(rpcProtocol);
-                break;
-            case Constants.REGISTRY_REDIS:
-                registry = new RegistryConfig();
-                registry.setProtocol(Constants.REGISTRY_REDIS);
-                registry.setAddress(address);
-                reference.setRegistry(registry);
-                reference.setProtocol(rpcProtocol);
-                break;
-            case Constants.REGISTRY_SIMPLE:
-                registry = new RegistryConfig();
-                registry.setAddress(address);
-                reference.setRegistry(registry);
-                reference.setProtocol(rpcProtocol);
-                break;
-            default:
-                StringBuffer sb = new StringBuffer();
-                sb.append(rpcProtocol).append("://").append(address).append("/").append(interFace);
-                log.debug("rpc invoker url: {}", sb.toString());
-                reference.setUrl(sb.toString());
-                break;
-        }
-        reference.setInterface(interFace);
-        reference.setRetries(Integer.valueOf(retries));
-        reference.setCluster(cluster);
-        reference.setVersion(version);
-        reference.setTimeout(Integer.valueOf(timeout));
-        reference.setGroup(StringUtils.isBlank(group) ? null : group);
-        reference.setConnections(Integer.valueOf(connections));
-        reference.setLoadbalance(loadbalance);
-        reference.setAsync(async.endsWith(Constants.ASYNC) ? true : false);
-        reference.setGeneric(true);
-
-        ReferenceConfigCache cache = ReferenceConfigCache.getCache(address, new ReferenceConfigCache.KeyGenerator() {
-            @Override
-            public String generateKey(ReferenceConfig<?> referenceConfig) {
-                return referenceConfig.toString();
-            }
-        });
-        GenericService genericService = (GenericService) cache.get(reference);
         final JMeterVariables variables = getThreadContext().getVariables();
-        variables.putObject(variableName, genericService);
-        variables.put(variableName + "_samplerData", getSamplerData());
+        if (Objects.isNull(variables.getObject(variableName))){
+            if (log.isDebugEnabled()) {
+                log.debug("init dubbo config");
+                log.debug(toString());
+            }
+            ApplicationConfig application = new ApplicationConfig();
+            application.setName("JMeter-Dubbo");
+            ReferenceConfig reference = new ReferenceConfig();
+            reference.setApplication(application);
+            RegistryConfig registry = null;
+            switch (registryProtocol) {
+                case Constants.REGISTRY_ZOOKEEPER:
+                    registry = new RegistryConfig();
+                    registry.setProtocol(Constants.REGISTRY_ZOOKEEPER);
+                    registry.setAddress(address);
+                    reference.setRegistry(registry);
+                    reference.setProtocol(rpcProtocol);
+                    break;
+                case Constants.REGISTRY_MULTICAST:
+                    registry = new RegistryConfig();
+                    registry.setProtocol(Constants.REGISTRY_MULTICAST);
+                    registry.setAddress(address);
+                    reference.setRegistry(registry);
+                    reference.setProtocol(rpcProtocol);
+                    break;
+                case Constants.REGISTRY_REDIS:
+                    registry = new RegistryConfig();
+                    registry.setProtocol(Constants.REGISTRY_REDIS);
+                    registry.setAddress(address);
+                    reference.setRegistry(registry);
+                    reference.setProtocol(rpcProtocol);
+                    break;
+                case Constants.REGISTRY_SIMPLE:
+                    registry = new RegistryConfig();
+                    registry.setAddress(address);
+                    reference.setRegistry(registry);
+                    reference.setProtocol(rpcProtocol);
+                    break;
+                default:
+                    StringBuffer sb = new StringBuffer();
+                    sb.append(rpcProtocol).append("://").append(address).append("/").append(interFace);
+                    log.debug("rpc invoker url: {}", sb.toString());
+                    reference.setUrl(sb.toString());
+                    break;
+            }
+            reference.setInterface(interFace);
+            reference.setRetries(Integer.valueOf(retries));
+            reference.setCluster(cluster);
+            reference.setVersion(version);
+            reference.setTimeout(Integer.valueOf(timeout));
+            reference.setGroup(StringUtils.isBlank(group) ? null : group);
+            reference.setConnections(Integer.valueOf(connections));
+            reference.setLoadbalance(loadbalance);
+            reference.setAsync(async.endsWith(Constants.ASYNC) ? true : false);
+            reference.setGeneric(true);
+
+            ReferenceConfigCache cache = ReferenceConfigCache.getCache(address, new ReferenceConfigCache.KeyGenerator() {
+                @Override
+                public String generateKey(ReferenceConfig<?> referenceConfig) {
+                    return referenceConfig.toString();
+                }
+            });
+            GenericService genericService = (GenericService) cache.get(reference);
+
+            variables.putObject(variableName, genericService);
+            variables.put(variableName + "_samplerData", getSamplerData());
+        }
     }
 
     public String getSamplerData() {
