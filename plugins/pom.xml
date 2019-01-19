@@ -12,6 +12,8 @@
         <module>dubbo</module>
         <module>mns</module>
         <module>redis</module>
+        <module>functions</module>
+        <module>token</module>
     </modules>
     <packaging>pom</packaging>
 
