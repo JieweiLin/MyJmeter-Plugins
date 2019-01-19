@@ -63,73 +63,6 @@ public class RedisSampler extends AbstractSampler implements TestBean, Serializa
         return result;
     }
 
-    /*private String callBack(SampleResult result) {
-        final JMeterVariables variables = getThreadContext().getVariables();
-        JedisPool pool = (JedisPool) variables.getObject(poolVariableName);
-        Jedis jedis = pool.getResource();
-        if (StringUtils.isNotBlank(database)){
-            jedis.select(Integer.parseInt(database));
-        }
-        String line = "";
-        try {
-            if (GetMode.HGETALL.equals(getMode)){
-                line = JSONUtils.valueToString(jedis.hgetAll(redisKey));
-            } else if (GetMode.TTL.equals(getMode)){
-                line = String.valueOf(jedis.ttl(redisKey));
-            } else if (GetMode.EXPIRE.equals(getMode)){
-                line = String.valueOf(jedis.expire(redisKey, Integer.parseInt(parameter)));
-            } else if (GetMode.GET.equals(getMode)){
-                line = String.valueOf(jedis.get(redisKey));
-            } else if (GetMode.DEL.equals(getMode)){
-                line = String.valueOf(jedis.del(redisKey));
-            } else if (GetMode.HGET.equals(getMode)){
-                line = String.valueOf(jedis.hget(redisKey, parameter));
-            } else if (GetMode.EXISTS.equals(getMode)){
-                line = String.valueOf(jedis.exists(redisKey));
-            } else if (GetMode.SET.equals(getMode)){
-                line = String.valueOf(jedis.set(redisKey, parameter));
-            } else if (GetMode.KEYS.equals(getMode)){
-                Set<String> keys = jedis.keys(redisKey);
-                int i = 1;
-                for (String key : keys) {
-                    variables.put(resultVariableNames + "_" + i, key);
-                    i++;
-                }
-                variables.put(resultVariableNames + "_N", String.valueOf(i-1));
-                line = keys.toString();
-            } else if (GetMode.TYPE.equals(getMode)){
-                line = jedis.type(redisKey);
-            }
-            if (StringUtils.isBlank(line)){
-                throw new JMeterStopThreadException("End of redis data");
-            }
-            if (!GetMode.KEYS.equals(getMode)){
-                String[] vars = JOrphanUtils.split(resultVariableNames, ",");
-                String[] values = {};
-                if (StringUtils.isNotBlank(delimiter)){
-                    values = JOrphanUtils.split(line, delimiter, false);
-                }
-                if (values.length > 0) {
-                    for (int i = 0; i < vars.length && i < values.length; i++) {
-                        variables.put(vars[i], values[i]);
-                    }
-                } else {
-                    variables.put(vars[0], line);
-                }
-            }
-            result.setSuccessful(true);
-        } catch (Exception e) {
-            line = "redis operation failed";
-            log.error("redis operation failed", e);
-            result.setSuccessful(false);
-        } finally {
-            if (jedis != null){
-                jedis.close();
-            }
-        }
-        return line;
-    }*/
-
     @Override
     public void testStarted() {
 
@@ -170,7 +103,7 @@ public class RedisSampler extends AbstractSampler implements TestBean, Serializa
                             return;
                         }
                     }
-                    log.warn("Could not convert {} = {} using Locale: ", pn, obj, rb.getLocale());
+                    log.warn("Could not convert {} = {} using Locale: {}", pn, obj, rb.getLocale());
                 } catch (IntrospectionException e) {
                     log.error("Could not find BeanInfo", e);
                 }
