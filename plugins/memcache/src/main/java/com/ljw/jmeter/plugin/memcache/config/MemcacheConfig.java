@@ -2,9 +2,11 @@ package com.ljw.jmeter.plugin.memcache.config;
 
 import net.spy.memcached.AddrUtil;
 import net.spy.memcached.ConnectionFactoryBuilder;
+import net.spy.memcached.FailureMode;
 import net.spy.memcached.MemcachedClient;
 import net.spy.memcached.auth.AuthDescriptor;
 import net.spy.memcached.auth.PlainCallbackHandler;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.jmeter.config.ConfigTestElement;
 import org.apache.jmeter.engine.event.LoopIterationEvent;
 import org.apache.jmeter.engine.event.LoopIterationListener;
@@ -17,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * @author 林杰炜 linjw
@@ -35,16 +38,23 @@ public class MemcacheConfig extends ConfigTestElement implements TestBean, LoopI
 
     @Override
     public void iterationStart(LoopIterationEvent iterEvent) {
-        AuthDescriptor ad = new AuthDescriptor(new String[]{"PLAIN"}, new PlainCallbackHandler(getUserName(), getPassword()));
+        final JMeterContext context = getThreadContext();
+        JMeterVariables variables = context.getVariables();
         MemcachedClient client = null;
         try {
-            client = new MemcachedClient(new ConnectionFactoryBuilder().setProtocol(ConnectionFactoryBuilder.Protocol.BINARY).setAuthDescriptor(ad).build(), AddrUtil.getAddresses(getHost() + ":" + getPort()));
+            if (Objects.isNull(variables.getObject(variableName))) {
+                if (StringUtils.isBlank(getUserName())) {
+                    client = new MemcachedClient(new ConnectionFactoryBuilder().setProtocol(ConnectionFactoryBuilder.Protocol.BINARY).setLocatorType(ConnectionFactoryBuilder.Locator.CONSISTENT).setFailureMode(FailureMode.Redistribute).setUseNagleAlgorithm(false).build(), AddrUtil.getAddresses(getHost() + ":" + getPort()));
+                } else {
+                    AuthDescriptor ad = new AuthDescriptor(new String[]{"PLAIN"}, new PlainCallbackHandler(getUserName(), getPassword()));
+                    client = new MemcachedClient(new ConnectionFactoryBuilder().setProtocol(ConnectionFactoryBuilder.Protocol.BINARY).setLocatorType(ConnectionFactoryBuilder.Locator.CONSISTENT).setFailureMode(FailureMode.Redistribute).setUseNagleAlgorithm(false).setAuthDescriptor(ad).build(), AddrUtil.getAddresses(getHost() + ":" + getPort()));
+                }
+                variables.putObject(variableName, client);
+            }
         } catch (IOException e) {
             log.error("初始化Memcache失败", e);
         }
-        final JMeterContext context = getThreadContext();
-        JMeterVariables variables = context.getVariables();
-        variables.putObject(variableName, client);
+
     }
 
     @Override
