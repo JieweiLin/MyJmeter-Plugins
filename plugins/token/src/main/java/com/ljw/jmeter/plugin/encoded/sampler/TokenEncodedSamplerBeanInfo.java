@@ -1,4 +1,4 @@
-package com.ljw.jmeter.plugin.encoded.config;
+package com.ljw.jmeter.plugin.encoded.sampler;
 
 import com.ljw.jmeter.plugin.common.AlgorithmEnum;
 import org.apache.jmeter.testbeans.BeanInfoSupport;
@@ -10,19 +10,19 @@ import java.beans.PropertyDescriptor;
 
 /**
  * @author 林杰炜 linjw
- * @Title token编码配置元件Gui
- * @Description token编码配置元件Gui
- * @date 2019/1/19 17:07
+ * @Title token编码采样器Gui
+ * @Description token编码采样器Gui
+ * @date 2019/1/21 15:25
  */
-public class TokenEncodedConfigBeanInfo extends BeanInfoSupport {
-    private static final Logger log = LoggerFactory.getLogger(TokenEncodedConfigBeanInfo.class);
+public class TokenEncodedSamplerBeanInfo extends BeanInfoSupport {
+    private static final Logger log = LoggerFactory.getLogger(TokenEncodedSamplerBeanInfo.class);
     private static final String VARIABLE_NAME = "variableName";
     private static final String DATA = "data";
     private static final String TOKEN_SECRET = "tokenSecret";
     private static final String ALGORITHM = "algorithm";
 
-    public TokenEncodedConfigBeanInfo() {
-        super(TokenEncodedConfig.class);
+    public TokenEncodedSamplerBeanInfo() {
+        super(TokenEncodedSampler.class);
 
         try {
             createPropertyGroup("variable_group", new String[]{VARIABLE_NAME});
@@ -45,7 +45,7 @@ public class TokenEncodedConfigBeanInfo extends BeanInfoSupport {
             p.setValue(NOT_UNDEFINED, Boolean.TRUE);
             p.setValue(DEFAULT, "");
         } catch (Exception e) {
-            log.error("init Token Encoded Config Gui Error", e);
+            log.error("init Token Encoded Sampler Gui Error", e);
         }
     }
 }
