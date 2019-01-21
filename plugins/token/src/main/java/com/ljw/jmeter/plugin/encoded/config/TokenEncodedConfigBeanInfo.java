@@ -2,6 +2,7 @@ package com.ljw.jmeter.plugin.encoded.config;
 
 import com.ljw.jmeter.plugin.common.AlgorithmEnum;
 import org.apache.jmeter.testbeans.BeanInfoSupport;
+import org.apache.jmeter.testbeans.gui.TypeEditor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,7 +41,8 @@ public class TokenEncodedConfigBeanInfo extends BeanInfoSupport {
             p.setValue(NOT_UNDEFINED, Boolean.TRUE);
             p.setValue(DEFAULT, "");
 
-            p = property(DATA);
+            p = property(DATA, TypeEditor.TextAreaEditor);
+            p.setValue(MULTILINE, Boolean.TRUE);
             p.setValue(NOT_UNDEFINED, Boolean.TRUE);
             p.setValue(DEFAULT, "");
         } catch (Exception e){

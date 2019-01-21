@@ -42,14 +42,26 @@ public class TokenEncodedConfig extends ConfigTestElement implements TestBean, L
     private String tokenSecret;
     private AlgorithmEnum algorithm;
     private static Map<Byte, String> algorithmMap = Maps.newHashMap();
+
     static {
         algorithmMap.put((byte) 0, "HS256");
+        algorithmMap.put((byte) 1, "HS384");
+        algorithmMap.put((byte) 2, "HS512");
+        algorithmMap.put((byte) 3, "RS256");
+        algorithmMap.put((byte) 4, "RS384");
+        algorithmMap.put((byte) 5, "RS512");
+        algorithmMap.put((byte) 6, "ES256");
+        algorithmMap.put((byte) 7, "ES384");
+        algorithmMap.put((byte) 8, "ES512");
+        algorithmMap.put((byte) 9, "PS256");
+        algorithmMap.put((byte) 10, "PS384");
+        algorithmMap.put((byte) 11, "PS512");
     }
 
     @Override
     public void iterationStart(LoopIterationEvent loopIterationEvent) {
         JMeterVariables variables = getThreadContext().getVariables();
-        if (StringUtils.isNotBlank(variables.get(variableName))) {
+        if (StringUtils.isBlank(variables.get(variableName))) {
             try {
                 Payload payload = JsonUtils.readValue(data, Payload.class);
 
@@ -67,12 +79,11 @@ public class TokenEncodedConfig extends ConfigTestElement implements TestBean, L
                         .withClaim("appType", payload.getAppType())
                         .withClaim("sessionId", payload.getSessionId())
                         .withClaim("isOperation", payload.isOperation())
-                        .withClaim("iat", new Date(payload.getIat()))
-                        .withClaim("exp", new Date(payload.getExp()))
+                        .withClaim("iat", new Date(payload.getIat() * 1000))
+                        .withClaim("exp", new Date(payload.getExp() * 1000))
                         .withClaim("tokenType", (int) payload.getTokenType())
                         .sign(getAlgoritm());
-
-                if (StringUtils.isNotBlank(variableName)){
+                if (StringUtils.isNotBlank(variableName)) {
                     variables.put(variableName.trim(), token);
                 }
             } catch (IllegalArgumentException e) {
@@ -116,18 +127,18 @@ public class TokenEncodedConfig extends ConfigTestElement implements TestBean, L
 
     @Override
     public void setProperty(JMeterProperty property) {
-        if (property instanceof StringProperty){
+        if (property instanceof StringProperty) {
             final String pn = property.getName();
-            if ("algorithm".equals(pn)){
+            if ("algorithm".equals(pn)) {
                 final Object obj = property.getObjectValue();
                 try {
                     final BeanInfo beanInfo = Introspector.getBeanInfo(this.getClass());
                     final ResourceBundle rb = (ResourceBundle) beanInfo.getBeanDescriptor().getValue(GenericTestBeanCustomizer.RESOURCE_BUNDLE);
                     for (Enum<AlgorithmEnum> e : AlgorithmEnum.values()) {
                         final String propName = e.toString();
-                        if (obj.equals(rb.getObject(propName))){
+                        if (obj.equals(rb.getObject(propName))) {
                             final int tmpMode = e.ordinal();
-                            if (log.isDebugEnabled()){
+                            if (log.isDebugEnabled()) {
                                 log.debug("Converted {} = {} to mode = {} using Locale: {}", pn, obj, tmpMode, rb.getLocale());
                             }
                             super.setProperty(pn, tmpMode);
