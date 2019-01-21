@@ -53,13 +53,13 @@ public class TokenDecodedConfig extends ConfigTestElement implements TestBean, L
                         Map<String, Claim> map = jwt.getClaims();
                         for (String key : map.keySet()) {
                             if ("isOperation".equals(key)) {
-                                variables.put(key, String.valueOf(map.get(key).asBoolean()));
+                                variables.put(variableName + "_" + key, String.valueOf(map.get(key).asBoolean()));
                             } else if ("iat".equals(key) || "exp".equals(key)) {
-                                variables.put(key, String.valueOf(map.get(key).asDate().getTime()));
+                                variables.put(variableName + "_" + key, String.valueOf(map.get(key).asDate().getTime()));
                             } else if ("tokenType".equals(key)) {
-                                variables.put(key, String.valueOf(map.get(key).asInt()));
+                                variables.put(variableName + "_" + key, String.valueOf(map.get(key).asInt()));
                             } else {
-                                variables.put(key, map.get(key).asString());
+                                variables.put(variableName + "_" + key, map.get(key).asString());
                             }
                         }
                     }
