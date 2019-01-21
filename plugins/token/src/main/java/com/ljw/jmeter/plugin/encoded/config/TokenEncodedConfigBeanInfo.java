@@ -12,7 +12,6 @@ import java.beans.PropertyDescriptor;
  * @author 林杰炜 linjw
  * @Title token编码配置元件Gui
  * @Description token编码配置元件Gui
- * @Copyright 2014-现在 厦门神州鹰掌通家园项目组
  * @date 2019/1/19 17:07
  */
 public class TokenEncodedConfigBeanInfo extends BeanInfoSupport {
@@ -39,7 +38,7 @@ public class TokenEncodedConfigBeanInfo extends BeanInfoSupport {
 
             p = property(TOKEN_SECRET);
             p.setValue(NOT_UNDEFINED, Boolean.TRUE);
-            p.setValue(DEFAULT, "");
+            p.setValue(DEFAULT, "debug-U^Xr%w&TYX8Gee9");
 
             p = property(DATA, TypeEditor.TextAreaEditor);
             p.setValue(MULTILINE, Boolean.TRUE);

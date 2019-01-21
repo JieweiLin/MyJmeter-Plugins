@@ -32,7 +32,6 @@ import java.util.ResourceBundle;
  * @author 林杰炜 linjw
  * @Title token编码配置元件
  * @Description token编码配置元件
- * @Copyright 2014-现在 厦门神州鹰掌通家园项目组
  * @date 2019/1/19 17:07
  */
 public class TokenEncodedConfig extends ConfigTestElement implements TestBean, LoopIterationListener, NoConfigMerge, TestStateListener {

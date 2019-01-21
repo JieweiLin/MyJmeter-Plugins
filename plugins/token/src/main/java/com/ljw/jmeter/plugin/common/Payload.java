@@ -99,4 +99,20 @@ public class Payload {
     public void setTokenType(Byte tokenType) {
         this.tokenType = tokenType;
     }
+
+    @Override
+    public String toString() {
+        return "Payload{" +
+                "id='" + id + '\'' +
+                ", userId='" + userId + '\'' +
+                ", userType='" + userType + '\'' +
+                ", devType='" + devType + '\'' +
+                ", appType='" + appType + '\'' +
+                ", sessionId='" + sessionId + '\'' +
+                ", isOperation=" + isOperation +
+                ", iat=" + iat +
+                ", exp=" + exp +
+                ", tokenType=" + tokenType +
+                '}';
+    }
 }
