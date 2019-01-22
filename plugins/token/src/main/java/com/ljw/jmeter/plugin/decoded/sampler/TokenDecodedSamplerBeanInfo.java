@@ -1,4 +1,4 @@
-package com.ljw.jmeter.plugin.decoded.config;
+package com.ljw.jmeter.plugin.decoded.sampler;
 
 import org.apache.jmeter.testbeans.BeanInfoSupport;
 import org.apache.jmeter.testbeans.gui.TypeEditor;
@@ -9,17 +9,17 @@ import java.beans.PropertyDescriptor;
 
 /**
  * @author 林杰炜 linjw
- * @Title Token解码配置元件Gui
- * @Description Token解码配置元件Gui
- * @date 2019/1/21 10:36
+ * @Title token解码采样器Gui
+ * @Description token解码采样器Gui
+ * @date 2019/1/21 16:58
  */
-public class TokenDecodedConfigBeanInfo extends BeanInfoSupport {
-    private static final Logger log = LoggerFactory.getLogger(TokenDecodedConfigBeanInfo.class);
+public class TokenDecodedSamplerBeanInfo extends BeanInfoSupport {
+    private static final Logger log = LoggerFactory.getLogger(TokenDecodedSamplerBeanInfo.class);
     private static final String VARIABLE_NAME = "variableName";
     private static final String TOKEN = "token";
 
-    public TokenDecodedConfigBeanInfo() {
-        super(TokenDecodedConfig.class);
+    public TokenDecodedSamplerBeanInfo(){
+        super(TokenDecodedSampler.class);
 
         try {
             createPropertyGroup("variable_group", new String[]{VARIABLE_NAME});
@@ -33,8 +33,8 @@ public class TokenDecodedConfigBeanInfo extends BeanInfoSupport {
             p.setValue(MULTILINE, Boolean.TRUE);
             p.setValue(NOT_UNDEFINED, Boolean.TRUE);
             p.setValue(DEFAULT, "");
-        } catch (Exception e) {
-            log.error("init Token Decoded Config Gui Error", e);
+        } catch (Exception e){
+            log.error("init Token Decoded Sampler Gui Error", e);
         }
     }
 }
