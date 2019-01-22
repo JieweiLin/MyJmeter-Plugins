@@ -23,7 +23,7 @@ public class JsonUtils {
         try {
             return JSON.parseObject(json, cls);
         } catch (Exception e) {
-            log.error("json to class[{}] is error!", cls.getName(), e);
+            log.error("json to class[{}] is error!, json:[{}]", cls.getName(), json, e);
         }
         return null;
     }

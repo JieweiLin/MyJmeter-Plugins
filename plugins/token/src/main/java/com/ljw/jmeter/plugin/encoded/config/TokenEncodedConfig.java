@@ -31,15 +31,16 @@ public class TokenEncodedConfig extends ConfigTestElement implements TestBean, L
     public void iterationStart(LoopIterationEvent loopIterationEvent) {
         JMeterVariables variables = getThreadContext().getVariables();
         if (StringUtils.isBlank(variables.get(variableName))) {
+            if (log.isDebugEnabled()){
+                log.debug("data:{}, tokenSecret:{}", data, tokenSecret);
+            }
             try {
                 String token = TokenUtils.createToken(data, tokenSecret, algorithm);
                 if (StringUtils.isNotBlank(variableName)) {
                     variables.put(variableName.trim(), token);
                 }
-            } catch (IllegalArgumentException e) {
-                log.error("init Token error", e);
-            } catch (JWTCreationException e) {
-                log.error("init Token error", e);
+            } catch (Exception e) {
+                log.error("init Token error, data:{}, tokenSecret:{}", data, tokenSecret, e);
             }
         }
     }
