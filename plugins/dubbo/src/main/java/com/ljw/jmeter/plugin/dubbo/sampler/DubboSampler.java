@@ -122,7 +122,7 @@ public class DubboSampler extends AbstractSampler implements TestBean, Serializa
                     for (String key : jsonObject.keySet()) {
                         String paramType = key;
                         String paramValue = "";
-                        if (paramType.equals("String") || paramType.equals("string") || paramType.equals("java.lang.String")) {
+                        if ("String".equals(paramType) || "string".equals(paramType) || "java.lang.String".equals(paramType)) {
                             paramValue = (String) jsonObject.get(key);
                         } else {
                             paramValue = JsonUtils.getJson(jsonObject.get(key));
