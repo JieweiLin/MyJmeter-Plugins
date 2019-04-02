@@ -30,22 +30,29 @@ public class OnsConfig extends ConfigTestElement implements TestBean, LoopIterat
     private String accessKey;
     private String secretKey;
     private String sendMsgTimeout;
-    private String onsAddr;
+    private String getMode;
+    private String addr;
+    static String ONS_ADDR_MODULE = "ONSAddr";
+    static String NAMESRV_ADDR_MODULE = "NAMESRV_ADDR";
 
     @Override
     public void iterationStart(LoopIterationEvent iterEvent) {
         try {
             final JMeterContext context = getThreadContext();
             JMeterVariables variables = context.getVariables();
-            if (Objects.isNull(variables.getObject(variableName))){
-                if (log.isDebugEnabled()){
+            if (Objects.isNull(variables.getObject(variableName))) {
+                if (log.isDebugEnabled()) {
                     log.debug("init OnsConfig!");
                 }
                 Properties properties = new Properties();
                 properties.put(PropertyKeyConst.AccessKey, getAccessKey());
                 properties.put(PropertyKeyConst.SecretKey, getSecretKey());
                 properties.put(PropertyKeyConst.SendMsgTimeoutMillis, getSendMsgTimeout());
-                properties.put(PropertyKeyConst.ONSAddr, getOnsAddr());
+                if (ONS_ADDR_MODULE.equals(getMode)) {
+                    properties.put(PropertyKeyConst.ONSAddr, getAddr());
+                } else if (NAMESRV_ADDR_MODULE.equals(getMode)) {
+                    properties.put(PropertyKeyConst.NAMESRV_ADDR, getAddr());
+                }
                 Producer producer = ONSFactory.createProducer(properties);
                 producer.start();
                 variables.putObject(variableName, producer);
@@ -107,11 +114,19 @@ public class OnsConfig extends ConfigTestElement implements TestBean, LoopIterat
         this.sendMsgTimeout = sendMsgTimeout;
     }
 
-    public String getOnsAddr() {
-        return onsAddr;
+    public String getGetMode() {
+        return getMode;
     }
 
-    public void setOnsAddr(String onsAddr) {
-        this.onsAddr = onsAddr;
+    public void setGetMode(String getMode) {
+        this.getMode = getMode;
+    }
+
+    public String getAddr() {
+        return addr;
+    }
+
+    public void setAddr(String addr) {
+        this.addr = addr;
     }
 }

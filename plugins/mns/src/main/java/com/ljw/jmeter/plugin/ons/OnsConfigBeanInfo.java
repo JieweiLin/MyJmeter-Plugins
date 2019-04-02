@@ -19,8 +19,9 @@ public class OnsConfigBeanInfo extends BeanInfoSupport {
     private static final String VARIABLE_NAME = "variableName";
     private static final String ACCESS_KEY = "accessKey";
     private static final String SECRET_KEY = "secretKey";
-    private static final String SENDMSG_TIMEOUT = "sendMsgTimeout";
-    private static final String ONS_ADDR = "onsAddr";
+    private static final String SEND_MSG_TIMEOUT = "sendMsgTimeout";
+    private static final String GET_MODE = "getMode";
+    private static final String ADDR = "addr";
 
     public OnsConfigBeanInfo() {
         super(OnsConfig.class);
@@ -32,7 +33,7 @@ public class OnsConfigBeanInfo extends BeanInfoSupport {
             p.setValue(DEFAULT, "");
             p.setValue(NOT_EXPRESSION, Boolean.TRUE);
 
-            createPropertyGroup("ons_config", new String[]{ACCESS_KEY, SECRET_KEY, SENDMSG_TIMEOUT, ONS_ADDR});
+            createPropertyGroup("ons_config", new String[]{ACCESS_KEY, SECRET_KEY, SEND_MSG_TIMEOUT, GET_MODE, ADDR});
             p = property(ACCESS_KEY);
             p.setValue(NOT_UNDEFINED, Boolean.TRUE);
             p.setValue(DEFAULT, "");
@@ -41,11 +42,20 @@ public class OnsConfigBeanInfo extends BeanInfoSupport {
             p.setValue(NOT_UNDEFINED, Boolean.TRUE);
             p.setValue(DEFAULT, "");
 
-            p = property(SENDMSG_TIMEOUT);
+            p = property(SEND_MSG_TIMEOUT);
             p.setValue(NOT_UNDEFINED, Boolean.TRUE);
             p.setValue(DEFAULT, "3000");
 
-            p = property(ONS_ADDR);
+            p = property(GET_MODE);
+            p.setValue(NOT_UNDEFINED, Boolean.TRUE);
+            p.setValue(DEFAULT, OnsConfig.ONS_ADDR_MODULE);
+            p.setValue(NOT_OTHER, Boolean.TRUE);
+            p.setValue(TAGS, new String[]{
+                    OnsConfig.ONS_ADDR_MODULE,
+                    OnsConfig.NAMESRV_ADDR_MODULE
+            });
+
+            p = property(ADDR);
             p.setValue(NOT_UNDEFINED, Boolean.TRUE);
             p.setValue(DEFAULT, "");
         } catch (Exception e) {
