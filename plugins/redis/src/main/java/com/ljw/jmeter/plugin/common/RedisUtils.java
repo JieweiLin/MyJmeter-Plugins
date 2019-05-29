@@ -90,7 +90,7 @@ public class RedisUtils {
                         variables.put(vars[i], values[i]);
                     }
                 } else {
-                    variables.put(vars[0], line);
+                    variables.put(vars[0], "null".equals(line) ? "" : line);
                 }
             }
             if (result != null){
