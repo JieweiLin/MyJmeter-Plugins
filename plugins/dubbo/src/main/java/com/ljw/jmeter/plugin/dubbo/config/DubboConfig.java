@@ -1,10 +1,10 @@
 package com.ljw.jmeter.plugin.dubbo.config;
 
-import com.alibaba.dubbo.config.ApplicationConfig;
-import com.alibaba.dubbo.config.ReferenceConfig;
-import com.alibaba.dubbo.config.RegistryConfig;
-import com.alibaba.dubbo.config.utils.ReferenceConfigCache;
-import com.alibaba.dubbo.rpc.service.GenericService;
+import org.apache.dubbo.config.ApplicationConfig;
+import org.apache.dubbo.config.ReferenceConfig;
+import org.apache.dubbo.config.RegistryConfig;
+import org.apache.dubbo.config.utils.ReferenceConfigCache;
+import org.apache.dubbo.rpc.service.GenericService;
 import com.ljw.jmeter.plugin.dubbo.common.Constants;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.jmeter.config.ConfigTestElement;

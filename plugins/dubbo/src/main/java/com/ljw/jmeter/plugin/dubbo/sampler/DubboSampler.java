@@ -1,7 +1,7 @@
 package com.ljw.jmeter.plugin.dubbo.sampler;
 
-import com.alibaba.dubbo.rpc.service.GenericException;
-import com.alibaba.dubbo.rpc.service.GenericService;
+import org.apache.dubbo.rpc.service.GenericException;
+import org.apache.dubbo.rpc.service.GenericService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -55,7 +55,15 @@ public class DubboSampler extends AbstractSampler implements TestBean, Serializa
 
     private Object callDubbo(JMeterVariables variables, SampleResult res) {
         try {
+            Result result = new Result();
             GenericService genericService = (GenericService) variables.getObject(variableName);
+            if (genericService == null){
+                log.error("dubbo 连接丢失");
+                res.setSuccessful(false);
+                result.setCode(-1);
+                result.setBody("dubbo 连接丢失");
+                return result;
+            }
             String[] parameterTypes = null;
             Object[] parameterValues = null;
             List<MethodArgument> args = getMethodArgs();
@@ -67,7 +75,6 @@ public class DubboSampler extends AbstractSampler implements TestBean, Serializa
             parameterTypes = paramterTypeList.toArray(new String[paramterTypeList.size()]);
             parameterValues = parameterValuesList.toArray(new Object[parameterValuesList.size()]);
             Object obj = null;
-            Result result = new Result();
             try {
                 obj = genericService.$invoke(method, parameterTypes, parameterValues);
                 result.setCode(10000);

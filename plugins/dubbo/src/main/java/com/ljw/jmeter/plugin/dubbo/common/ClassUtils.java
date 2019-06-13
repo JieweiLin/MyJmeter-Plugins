@@ -2,6 +2,8 @@ package com.ljw.jmeter.plugin.dubbo.common;
 
 import com.google.common.reflect.TypeToken;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
@@ -19,9 +21,9 @@ import java.util.Map;
  * @date 2018/12/14 17:23
  */
 public class ClassUtils {
+    private static Logger logger = LoggerFactory.getLogger(ClassUtils.class);
 
     private static final String TYPE_NAME_PREFIX = "class ";
-    static DateTimeFormatter ymd = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public static String getClassName(Type type) {
         if (type == null) {
@@ -212,9 +214,10 @@ public class ClassUtils {
                     || "Date".equals(className)) {
                 paramterTypeList.add("java.util.Date");
                 parameterValuesList.add(isBlank(arg.getParamValue()) ? null : new Date(Long.parseLong(arg.getParamValue())));
-            } else if ("java.Time.LocalDate".equals(className) || "LocalDate".equals(className)) {
-                paramterTypeList.add("java.Time.LocalDate");
-                parameterValuesList.add(isBlank(arg.getParamValue()) ? null : LocalDate.parse(arg.getParamValue(), ymd));
+            } else if ("java.time.LocalDate".equals(className) || "LocalDate".equals(className)) {
+                paramterTypeList.add("java.time.LocalDate");
+                DateTimeFormatter ymd = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                parameterValuesList.add(isBlank(arg.getParamValue()) ? null : LocalDate.parse(arg.getParamValue().replaceAll("\"", ""), ymd));
             } else if (className.contains("/")) {
                 String[] clas = className.split("/");
                 String type = clas[0];
