@@ -10,6 +10,7 @@ import org.apache.jmeter.samplers.Sampler;
 import org.apache.jmeter.threads.JMeterVariables;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
 
 import java.util.Collection;
 import java.util.List;
@@ -40,7 +41,11 @@ public class DBEncrypt extends AbstractFunction {
     public String execute(SampleResult previousResult, Sampler currentSampler) throws InvalidVariableException {
         String plainText = getParameter(0);
         String secretKey = getParameter(1);
+        log.info("plainText: {}, secretKey: {}", plainText, secretKey);
         String result = "";
+        if (StringUtils.isEmpty(plainText)){
+            return result;
+        }
         try {
             result = Sm4Util.encryptEcb(secretKey, plainText);
         } catch (Exception e) {
