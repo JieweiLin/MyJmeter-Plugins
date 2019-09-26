@@ -18,7 +18,6 @@ import java.util.List;
  * @author 林杰炜 linjw
  * @Title 计算MD5值
  * @Description 计算MD5值
- * @Copyright 2014-现在 厦门神州鹰掌通家园项目组
  * @date 2019/1/17 15:50
  */
 public class MD5 extends AbstractFunction {

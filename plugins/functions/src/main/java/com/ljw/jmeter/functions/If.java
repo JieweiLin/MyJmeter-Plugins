@@ -15,7 +15,6 @@ import java.util.List;
  * @author 林杰炜 linjw
  * @Title If方法
  * @Description If方法
- * @Copyright 2014-现在 厦门神州鹰掌通家园项目组
  * @date 2019/1/19 15:02
  */
 public class If extends AbstractFunction {

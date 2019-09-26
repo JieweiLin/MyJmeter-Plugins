@@ -12,7 +12,7 @@ import java.security.Security;
 import java.util.Arrays;
 
 /**
- * @author 胡耀忠 huyaozhong
+ * @author 林杰炜 linjw
  * @Title SM4加密解密工具类
  * @Description 国密算法。用于数据库敏感字段加密
  * @Copyright 2014-现在 厦门神州鹰掌通家园项目组
