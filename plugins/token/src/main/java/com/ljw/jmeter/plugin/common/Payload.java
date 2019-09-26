@@ -4,7 +4,6 @@ package com.ljw.jmeter.plugin.common;
  * @author 林杰炜 linjw
  * @Title token中的payload实体
  * @Description token中的payload实体
- * @Copyright 2014-现在 厦门神州鹰掌通家园项目组
  * @date 2019/1/19 17:29
  */
 public class Payload {
