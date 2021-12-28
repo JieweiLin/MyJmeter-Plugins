@@ -35,6 +35,7 @@ public class DBEncrypt extends AbstractFunction {
     private Object[] values;
 
     public DBEncrypt() {
+        //Do nothing
     }
 
     @Override

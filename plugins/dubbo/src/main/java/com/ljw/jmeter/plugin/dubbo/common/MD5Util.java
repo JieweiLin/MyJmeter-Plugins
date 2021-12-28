@@ -33,8 +33,7 @@ public class MD5Util {
         }
         md.update(input.getBytes());
         byte[] digest = md.digest();
-        String hash = convertToString(digest);
-        return hash;
+        return convertToString(digest);
     }
 
     private static String convertToString(byte[] data) {

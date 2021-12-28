@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class Constants {
 
-    public static Map<Byte, String> algorithmMap = Maps.newHashMap();
+    protected static final Map<Byte, String> algorithmMap = Maps.newHashMap();
 
     static {
         algorithmMap.put((byte) 0, "HS256");

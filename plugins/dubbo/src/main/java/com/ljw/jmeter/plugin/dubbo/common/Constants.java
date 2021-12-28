@@ -36,12 +36,12 @@ public class Constants {
     public static final byte BYTE_DEFAULT = 0;
     public static final long LONG_DEFAULT = 0L;
     public static final short SHORT_DEFAULT = 0;
-    public static final int[] INT_ARRAY_DEFAULT = null;
-    public static final double[] DOUBLE_ARRAY_DEFAULT = null;
-    public static final boolean[] BOOLEAN_ARRAY_DEFAULT = null;
-    public static final char[] CHAT_ARRAY_DEFAULT = null;
-    public static final float[] FLOAT_ARRAY_DEFAULT = null;
-    public static final byte[] BYTE_ARRAY_DEFAULT = null;
-    public static final long[] LONG_ARRAY_DEFAULT = null;
-    public static final short[] SHORT_ARRAY_DEFAULT = null;
+    protected static final int[] INT_ARRAY_DEFAULT = null;
+    protected static final double[] DOUBLE_ARRAY_DEFAULT = null;
+    protected static final boolean[] BOOLEAN_ARRAY_DEFAULT = null;
+    protected static final char[] CHAT_ARRAY_DEFAULT = null;
+    protected static final float[] FLOAT_ARRAY_DEFAULT = null;
+    protected static final byte[] BYTE_ARRAY_DEFAULT = null;
+    protected static final long[] LONG_ARRAY_DEFAULT = null;
+    protected static final short[] SHORT_ARRAY_DEFAULT = null;
 }

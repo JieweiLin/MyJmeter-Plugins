@@ -64,7 +64,7 @@ public class MemcacheConfig extends ConfigTestElement implements TestBean, LoopI
 
     @Override
     public void testStarted(String host) {
-
+        //do nothing
     }
 
     @Override
@@ -74,7 +74,7 @@ public class MemcacheConfig extends ConfigTestElement implements TestBean, LoopI
 
     @Override
     public void testEnded(String host) {
-
+        //do nothing
     }
 
     public String getVariableName() {

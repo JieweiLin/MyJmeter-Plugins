@@ -33,7 +33,7 @@ public class ALiYunKeyEncrypt extends AbstractFunction {
     }
 
     public ALiYunKeyEncrypt() {
-
+        // Do nothing
     }
 
     @Override

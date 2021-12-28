@@ -1,13 +1,13 @@
 package com.ljw.jmeter.plugin.dubbo.config;
 
+import com.ljw.jmeter.plugin.dubbo.common.Constants;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.dubbo.config.AbstractConfig;
 import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.ReferenceConfig;
-import org.apache.dubbo.config.ReferenceConfigBase;
 import org.apache.dubbo.config.RegistryConfig;
 import org.apache.dubbo.config.utils.ReferenceConfigCache;
 import org.apache.dubbo.rpc.service.GenericService;
-import com.ljw.jmeter.plugin.dubbo.common.Constants;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.jmeter.config.ConfigTestElement;
 import org.apache.jmeter.engine.event.LoopIterationEvent;
 import org.apache.jmeter.engine.event.LoopIterationListener;
@@ -71,7 +71,7 @@ public class DubboConfig extends ConfigTestElement implements TestBean, LoopIter
     @Override
     public void iterationStart(LoopIterationEvent iterEvent) {
         final JMeterVariables variables = getThreadContext().getVariables();
-        if (Objects.isNull(variables.getObject(variableName))){
+        if (Objects.isNull(variables.getObject(variableName))) {
             if (log.isDebugEnabled()) {
                 log.debug("init dubbo config");
                 log.debug(toString());
@@ -110,9 +110,9 @@ public class DubboConfig extends ConfigTestElement implements TestBean, LoopIter
                     reference.setProtocol(rpcProtocol);
                     break;
                 default:
-                    StringBuffer sb = new StringBuffer();
+                    StringBuilder sb = new StringBuilder();
                     sb.append(rpcProtocol).append("://").append(address).append("/").append(interFace);
-                    log.debug("rpc invoker url: {}", sb.toString());
+                    log.debug("rpc invoker url: {}", sb);
                     reference.setUrl(sb.toString());
                     break;
             }
@@ -124,15 +124,10 @@ public class DubboConfig extends ConfigTestElement implements TestBean, LoopIter
             reference.setGroup(StringUtils.isBlank(group) ? null : group);
             reference.setConnections(Integer.valueOf(connections));
             reference.setLoadbalance(loadbalance);
-            reference.setAsync(async.endsWith(Constants.ASYNC) ? true : false);
+            reference.setAsync(async.endsWith(Constants.ASYNC));
             reference.setGeneric(true);
 
-            ReferenceConfigCache cache = ReferenceConfigCache.getCache(address, new ReferenceConfigCache.KeyGenerator() {
-                @Override
-                public String generateKey(ReferenceConfigBase<?> referenceConfig) {
-                    return referenceConfig.toString();
-                }
-            });
+            ReferenceConfigCache cache = ReferenceConfigCache.getCache(address, AbstractConfig::toString);
             GenericService genericService = (GenericService) cache.get(reference);
 
             variables.putObject(variableName, genericService);
@@ -164,7 +159,7 @@ public class DubboConfig extends ConfigTestElement implements TestBean, LoopIter
 
     @Override
     public void testStarted(String host) {
-
+        //do nothing
     }
 
     @Override
@@ -174,13 +169,13 @@ public class DubboConfig extends ConfigTestElement implements TestBean, LoopIter
 
     @Override
     public void testEnded(String host) {
-
+        //do nothing
     }
 
-    public static final String[] registryProtocols = new String[]{"none", "zookeeper", "multicast", "redis", "simple"};
-    public static final String[] rpcProtocols = new String[]{"dubbo", "hessian", "webservice", "memcached", "rpcredis"};
-    public static final String[] consumerAsyncs = new String[]{"async", "sync"};
-    public static final String[] consumerLoadbalance = new String[]{"random", "roundrobin", "leastactive", "consistenthash"};
+    protected static final String[] registryProtocols = new String[]{"none", "zookeeper", "multicast", "redis", "simple"};
+    protected static final String[] rpcProtocols = new String[]{"dubbo", "hessian", "webservice", "memcached", "rpcredis"};
+    protected static final String[] consumerAsyncs = new String[]{"async", "sync"};
+    protected static final String[] consumerLoadbalance = new String[]{"random", "roundrobin", "leastactive", "consistenthash"};
 
     @Override
     public void setProperty(JMeterProperty property) {

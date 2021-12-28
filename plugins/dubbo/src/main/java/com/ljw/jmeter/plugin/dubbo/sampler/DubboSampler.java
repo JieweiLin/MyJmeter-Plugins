@@ -1,7 +1,5 @@
 package com.ljw.jmeter.plugin.dubbo.sampler;
 
-import org.apache.dubbo.rpc.service.GenericException;
-import org.apache.dubbo.rpc.service.GenericService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -11,6 +9,8 @@ import com.ljw.jmeter.plugin.dubbo.common.JsonUtils;
 import com.ljw.jmeter.plugin.dubbo.common.MethodArgument;
 import com.ljw.jmeter.plugin.dubbo.common.Result;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.dubbo.rpc.service.GenericException;
+import org.apache.dubbo.rpc.service.GenericService;
 import org.apache.jmeter.samplers.AbstractSampler;
 import org.apache.jmeter.samplers.Entry;
 import org.apache.jmeter.samplers.SampleResult;
@@ -21,7 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +45,7 @@ public class DubboSampler extends AbstractSampler implements TestBean, Serializa
         result.sampleStart();
         JMeterVariables variables = getThreadContext().getVariables();
         result.setSamplerData(getSampleData(variables));
-        result.setResponseData(JsonUtils.getJson(callDubbo(variables, result)).getBytes(Charset.forName("utf-8")));
+        result.setResponseData(JsonUtils.getJson(callDubbo(variables, result)).getBytes(StandardCharsets.UTF_8));
         result.setDataType(SampleResult.TEXT);
         result.setResponseOK();
         result.setResponseMessageOK();
@@ -57,7 +57,7 @@ public class DubboSampler extends AbstractSampler implements TestBean, Serializa
         try {
             Result result = new Result();
             GenericService genericService = (GenericService) variables.getObject(variableName);
-            if (genericService == null){
+            if (genericService == null) {
                 log.error("dubbo 连接丢失");
                 res.setSuccessful(false);
                 result.setCode(-1);
@@ -67,13 +67,13 @@ public class DubboSampler extends AbstractSampler implements TestBean, Serializa
             String[] parameterTypes = null;
             Object[] parameterValues = null;
             List<MethodArgument> args = getMethodArgs();
-            List<String> paramterTypeList = new ArrayList<String>();
-            List<Object> parameterValuesList = new ArrayList<Object>();
+            List<String> paramterTypeList = new ArrayList<>();
+            List<Object> parameterValuesList = new ArrayList<>();
             for (MethodArgument arg : args) {
                 ClassUtils.parseParameter(paramterTypeList, parameterValuesList, arg);
             }
-            parameterTypes = paramterTypeList.toArray(new String[paramterTypeList.size()]);
-            parameterValues = parameterValuesList.toArray(new Object[parameterValuesList.size()]);
+            parameterTypes = paramterTypeList.toArray(new String[0]);
+            parameterValues = parameterValuesList.toArray(new Object[0]);
             Object obj = null;
             try {
                 obj = genericService.$invoke(method, parameterTypes, parameterValues);
@@ -104,65 +104,63 @@ public class DubboSampler extends AbstractSampler implements TestBean, Serializa
     }
 
     private List<MethodArgument> getMethodArgs() {
-        List<MethodArgument> result = null;
+        List<MethodArgument> result = Lists.newArrayList();
         try {
             String methodArgs = getArgs();
             if (log.isDebugEnabled()) {
-                log.debug(getName() + "\nargs:" + methodArgs);
+                log.debug("{} \nargs: {}", getName(), methodArgs);
             }
             int size = 0;
             JSONArray jsonArray = null;
-            result = Lists.newArrayList();
             if (StringUtils.isNotBlank(methodArgs)) {
                 try {
                     jsonArray = JSON.parseArray(methodArgs);
                 } catch (Exception e) {
                     jsonArray = JSON.parseArray("[]");
                 }
-                if (jsonArray.size() > 0) {
+                if (!jsonArray.isEmpty()) {
                     size = jsonArray.size();
                 }
             }
             for (int i = 0; i < size; i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 if (jsonObject.keySet().size() == 1) {
-                    for (String key : jsonObject.keySet()) {
-                        String paramType = key;
+                    jsonObject.forEach((key, value) -> {
                         String paramValue = "";
-                        if ("String".equals(paramType) || "string".equals(paramType) || "java.lang.String".equals(paramType)) {
-                            paramValue = (String) jsonObject.get(key);
+                        if ("String".equals(key) || "string".equals(key) || "java.lang.String".equals(key)) {
+                            paramValue = (String) value;
                         } else {
-                            paramValue = JsonUtils.getJson(jsonObject.get(key));
+                            paramValue = JsonUtils.getJson(value);
                         }
-                        MethodArgument argument = new MethodArgument(paramType, paramValue);
+                        MethodArgument argument = new MethodArgument(key, paramValue);
                         result.add(argument);
-                    }
+                    });
                 }
             }
         } catch (Exception e) {
-            log.info("getMethodArgs error:" + e);
+            log.info("getMethodArgs error: ", e);
         }
         return result;
     }
 
     @Override
     public void testStarted() {
-
+        //do nothing
     }
 
     @Override
     public void testStarted(String host) {
-
+        //do nothing
     }
 
     @Override
     public void testEnded() {
-
+        //do nothing
     }
 
     @Override
     public void testEnded(String host) {
-
+        //do nothing
     }
 
     public String getVariableName() {

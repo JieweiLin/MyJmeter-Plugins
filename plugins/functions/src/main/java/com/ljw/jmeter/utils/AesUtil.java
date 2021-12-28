@@ -4,6 +4,7 @@ import org.apache.commons.codec.binary.Hex;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 /**
@@ -22,11 +23,11 @@ public class AesUtil {
      */
     public static String encrypt(String plainText,String secretKey) {
         try {
-            byte[] rawKey = Arrays.copyOf(secretKey.getBytes("ASCII"), 16);
+            byte[] rawKey = Arrays.copyOf(secretKey.getBytes(StandardCharsets.US_ASCII), 16);
             SecretKeySpec secretKeySpec = new SecretKeySpec(rawKey, "AES");
             Cipher cipher = Cipher.getInstance("AES");
             cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
-            byte[] encypted = cipher.doFinal(plainText.getBytes("UTF-8"));
+            byte[] encypted = cipher.doFinal(plainText.getBytes(StandardCharsets.UTF_8));
             return new String(Hex.encodeHex(encypted)).toUpperCase();
         } catch (Exception e) {
             return null;
@@ -42,7 +43,7 @@ public class AesUtil {
     public static String decrypt(String cipherText,String secretKey) {
         try {
             byte[] encrypted = Hex.decodeHex(cipherText.toLowerCase().toCharArray());
-            byte[] rawKey = Arrays.copyOf(secretKey.getBytes("ASCII"), 16);
+            byte[] rawKey = Arrays.copyOf(secretKey.getBytes(StandardCharsets.US_ASCII), 16);
             SecretKeySpec secretKeySpec = new SecretKeySpec(rawKey, "AES");
             Cipher cipher = Cipher.getInstance("AES");
             cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);

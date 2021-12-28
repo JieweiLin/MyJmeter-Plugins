@@ -32,6 +32,7 @@ public class If extends AbstractFunction {
     private Object[] values;
 
     public If() {
+        //do nothing
     }
 
     @Override
@@ -40,9 +41,9 @@ public class If extends AbstractFunction {
         String expected = getParameter(1);
         String result = null;
         if (actual.equals(expected)) {
-            result = getParameter(2).toString();
+            result = getParameter(2);
         } else {
-            result = getParameter(3).toString();
+            result = getParameter(3);
         }
         JMeterVariables variables = getVariables();
         if (values.length > 4) {

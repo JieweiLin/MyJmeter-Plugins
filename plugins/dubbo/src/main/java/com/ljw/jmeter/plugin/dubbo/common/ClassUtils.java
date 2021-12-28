@@ -64,10 +64,7 @@ public class ClassUtils {
     }
 
     public static boolean isBlank(String paramValue) {
-        if (StringUtils.isBlank(paramValue) || "null".equals(paramValue.toLowerCase())) {
-            return true;
-        }
-        return false;
+        return StringUtils.isBlank(paramValue) || "null".equalsIgnoreCase(paramValue);
     }
 
     @SuppressWarnings("serial")

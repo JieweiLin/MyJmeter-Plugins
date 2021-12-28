@@ -34,6 +34,7 @@ public class DBDecrypt extends AbstractFunction {
     }
 
     public DBDecrypt() {
+        //Do nothing
     }
 
     @Override
