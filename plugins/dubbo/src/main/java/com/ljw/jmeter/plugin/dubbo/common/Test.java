@@ -4,6 +4,7 @@ import com.alibaba.dubbo.common.Constants;
 import org.apache.dubbo.common.URL;
 import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.ReferenceConfig;
+import org.apache.dubbo.config.ReferenceConfigBase;
 import org.apache.dubbo.config.RegistryConfig;
 import org.apache.dubbo.config.utils.ReferenceConfigCache;
 import org.apache.dubbo.registry.RegistryService;
@@ -31,7 +32,7 @@ public class Test {
             reference.setInterface("org.apache.dubbo.registry.RegistryService");
             ReferenceConfigCache cache = ReferenceConfigCache.getCache(address + "_" + group, new ReferenceConfigCache.KeyGenerator() {
                 @Override
-                public String generateKey(ReferenceConfig<?> referenceConfig) {
+                public String generateKey(ReferenceConfigBase<?> referenceConfig) {
                     return referenceConfig.toString();
                 }
             });

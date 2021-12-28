@@ -2,6 +2,7 @@ package com.ljw.jmeter.plugin.dubbo.config;
 
 import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.ReferenceConfig;
+import org.apache.dubbo.config.ReferenceConfigBase;
 import org.apache.dubbo.config.RegistryConfig;
 import org.apache.dubbo.config.utils.ReferenceConfigCache;
 import org.apache.dubbo.rpc.service.GenericService;
@@ -128,7 +129,7 @@ public class DubboConfig extends ConfigTestElement implements TestBean, LoopIter
 
             ReferenceConfigCache cache = ReferenceConfigCache.getCache(address, new ReferenceConfigCache.KeyGenerator() {
                 @Override
-                public String generateKey(ReferenceConfig<?> referenceConfig) {
+                public String generateKey(ReferenceConfigBase<?> referenceConfig) {
                     return referenceConfig.toString();
                 }
             });

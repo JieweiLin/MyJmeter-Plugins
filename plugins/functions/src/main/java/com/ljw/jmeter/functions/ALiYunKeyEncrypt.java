@@ -2,7 +2,7 @@ package com.ljw.jmeter.functions;
 
 import com.alibaba.druid.filter.config.ConfigTools;
 import com.google.common.collect.Lists;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.jmeter.engine.util.CompoundVariable;
 import org.apache.jmeter.functions.AbstractFunction;
 import org.apache.jmeter.functions.InvalidVariableException;

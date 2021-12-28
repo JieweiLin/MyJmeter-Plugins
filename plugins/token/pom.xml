@@ -12,13 +12,13 @@
         <dependency>
             <groupId>avalon-framework</groupId>
             <artifactId>avalon-framework</artifactId>
-            <version>4.1.5</version>
+            <version>20020627</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.jmeter</groupId>
             <artifactId>ApacheJMeter_core</artifactId>
-            <version>5.0</version>
+            <version>5.4.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -30,19 +30,23 @@
         <dependency>
             <groupId>org.apache.jmeter</groupId>
             <artifactId>jorphan</artifactId>
-            <version>5.0</version>
+            <version>5.4.1</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
-            <version>3.5.0</version>
+            <version>3.18.2</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.50</version>
+            <version>1.2.79</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>31.0.1-jre</version>
         </dependency>
     </dependencies>
     <build>

@@ -2,6 +2,7 @@ package com.ljw.jmeter.functions;
 
 import com.google.common.collect.Lists;
 import com.ljw.jmeter.utils.Sm4Util;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.jmeter.engine.util.CompoundVariable;
 import org.apache.jmeter.functions.AbstractFunction;
 import org.apache.jmeter.functions.InvalidVariableException;
@@ -10,7 +11,6 @@ import org.apache.jmeter.samplers.Sampler;
 import org.apache.jmeter.threads.JMeterVariables;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
 
 import java.util.Collection;
 import java.util.List;
@@ -43,7 +43,7 @@ public class DBEncrypt extends AbstractFunction {
         String secretKey = getParameter(1);
         log.info("plainText: {}, secretKey: {}", plainText, secretKey);
         String result = "";
-        if (StringUtils.isEmpty(plainText)){
+        if (StringUtils.isEmpty(plainText)) {
             return result;
         }
         try {
