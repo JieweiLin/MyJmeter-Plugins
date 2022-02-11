@@ -16,9 +16,9 @@ import java.util.Collection;
 import java.util.List;
 
 /**
+ * 数据库字段加密
+ *
  * @author 林杰炜 linjw
- * @Title 数据库字段加密
- * @Description 数据库字段加密
  * @date 2019/6/12 9:17
  */
 public class DBEncrypt extends AbstractFunction {

@@ -12,21 +12,21 @@ import java.util.Collection;
 import java.util.List;
 
 /**
+ * If方法
+ *
  * @author 林杰炜 linjw
- * @Title If方法
- * @Description If方法
  * @date 2019/1/19 15:02
  */
 public class If extends AbstractFunction {
-    private static final List<String> desc = Lists.newLinkedList();
+    private static final List<String> DESC = Lists.newLinkedList();
     private static final String KEY = "__If";
 
     static {
-        desc.add("Actual value");
-        desc.add("Expected value");
-        desc.add("Result if actual == expected");
-        desc.add("Result if actual != expected");
-        desc.add("Name of variable in which to store the result (optional)");
+        DESC.add("Actual value");
+        DESC.add("Expected value");
+        DESC.add("Result if actual == expected");
+        DESC.add("Result if actual != expected");
+        DESC.add("Name of variable in which to store the result (optional)");
     }
 
     private Object[] values;
@@ -66,7 +66,7 @@ public class If extends AbstractFunction {
 
     @Override
     public List<String> getArgumentDesc() {
-        return desc;
+        return DESC;
     }
 
     private String getParameter(int i) {

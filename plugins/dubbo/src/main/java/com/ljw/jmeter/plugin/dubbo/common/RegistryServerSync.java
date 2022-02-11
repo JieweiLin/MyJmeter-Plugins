@@ -106,7 +106,7 @@ public class RegistryServerSync implements NotifyListener, Serializable {
                 if (URL_IDS_MAPPER.containsKey(url.toFullString())) {
                     ids.put(URL_IDS_MAPPER.get(url.toFullString()), url);
                 } else {
-                    String md5 = MD5Util.MD5_16bit(url.toFullString());
+                    String md5 = MD5Util.MD516Bit(url.toFullString());
                     ids.put(md5, url);
                     URL_IDS_MAPPER.putIfAbsent(url.toFullString(), md5);
                 }

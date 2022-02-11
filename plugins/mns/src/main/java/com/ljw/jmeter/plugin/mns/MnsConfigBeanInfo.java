@@ -8,7 +8,7 @@ import java.beans.PropertyDescriptor;
 
 /**
  * @author 林杰炜 linjw
- * @Title Mns配置元件GUI
+ *  Mns配置元件GUI
  * @Description Mns配置元件GUI
  * @date 2018/12/5 13:49
  */

@@ -21,9 +21,9 @@ import java.util.ResourceBundle;
 
 /**
  * @author 林杰炜 linjw
- * @Title redis前置处理器
+ *  redis前置处理器
  * @Description redis前置处理器
- * @Copyright 2014-现在 厦门神州鹰掌通家园项目组
+ * 
  * @date 2018/12/18 17:03
  */
 public class RedisPreProcessor extends AbstractScopedTestElement implements TestBean, PreProcessor, Serializable, TestStateListener {

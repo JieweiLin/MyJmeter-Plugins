@@ -10,7 +10,7 @@ import java.beans.PropertyDescriptor;
 
 /**
  * @author 林杰炜 linjw
- * @Title token编码配置元件Gui
+ *  token编码配置元件Gui
  * @Description token编码配置元件Gui
  * @date 2019/1/19 17:07
  */

@@ -27,14 +27,14 @@ import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.io.Serializable;
+import java.time.Duration;
 import java.util.ResourceBundle;
 import java.util.Set;
 
 /**
+ * TODO 类描述
+ *
  * @author 林杰炜 linjw
- * @Title TODO 类描述
- * @Description TODO 详细描述
- * @Copyright 2014-现在 厦门神州鹰掌通家园项目组
  * @date 2019/5/23 16:38
  */
 public class RedisTotalPreProcessor extends AbstractScopedTestElement implements TestBean, PreProcessor, Serializable, TestStateListener {
@@ -77,54 +77,54 @@ public class RedisTotalPreProcessor extends AbstractScopedTestElement implements
         Jedis jedis = this.pool.getResource();
         try {
             String line = "";
-            if (GetMode.HGETALL.equals(getMode)){
+            if (GetMode.HGETALL.equals(getMode)) {
                 line = JSONUtils.valueToString(jedis.hgetAll(redisKey));
-            } else if (GetMode.TTL.equals(getMode)){
+            } else if (GetMode.TTL.equals(getMode)) {
                 line = String.valueOf(jedis.ttl(redisKey));
-            } else if (GetMode.EXPIRE.equals(getMode)){
+            } else if (GetMode.EXPIRE.equals(getMode)) {
                 line = String.valueOf(jedis.expire(redisKey, Integer.parseInt(parameter)));
-            } else if (GetMode.GET.equals(getMode)){
+            } else if (GetMode.GET.equals(getMode)) {
                 line = String.valueOf(jedis.get(redisKey));
-            } else if (GetMode.DEL.equals(getMode)){
+            } else if (GetMode.DEL.equals(getMode)) {
                 line = String.valueOf(jedis.del(redisKey));
-            } else if (GetMode.HGET.equals(getMode)){
+            } else if (GetMode.HGET.equals(getMode)) {
                 line = String.valueOf(jedis.hget(redisKey, parameter));
-            } else if (GetMode.EXISTS.equals(getMode)){
+            } else if (GetMode.EXISTS.equals(getMode)) {
                 line = String.valueOf(jedis.exists(redisKey));
-            } else if (GetMode.SET.equals(getMode)){
+            } else if (GetMode.SET.equals(getMode)) {
                 line = String.valueOf(jedis.set(redisKey, parameter));
-            } else if (GetMode.KEYS.equals(getMode)){
+            } else if (GetMode.KEYS.equals(getMode)) {
                 Set<String> keys = jedis.keys(redisKey);
                 int i = 1;
                 for (String key : keys) {
                     variable.put(getVariableNames() + "_" + i, key);
                     i++;
                 }
-                variable.put(getVariableNames() + "_N", String.valueOf(i-1));
+                variable.put(getVariableNames() + "_N", String.valueOf(i - 1));
                 line = keys.toString();
-            } else if (GetMode.TYPE.equals(getMode)){
+            } else if (GetMode.TYPE.equals(getMode)) {
                 line = jedis.type(redisKey);
-            } else if (GetMode.SMEMBERS.equals(getMode)){
+            } else if (GetMode.SMEMBERS.equals(getMode)) {
                 Set<String> set = jedis.smembers(redisKey);
                 int i = 1;
                 for (String key : set) {
                     variable.put(getVariableNames() + "_" + i, key);
                     i++;
                 }
-                variable.put(getVariableNames() + "_N", String.valueOf(i-1));
+                variable.put(getVariableNames() + "_N", String.valueOf(i - 1));
                 line = set.toString();
-            } else if (GetMode.SISMEMBER.equals(getMode)){
+            } else if (GetMode.SISMEMBER.equals(getMode)) {
                 Boolean b = jedis.sismember(redisKey, parameter);
                 variable.put(getVariableNames(), String.valueOf(b));
                 line = String.valueOf(b);
             }
-            if (StringUtils.isBlank(line)){
+            if (StringUtils.isBlank(line)) {
                 throw new JMeterStopThreadException("End of redis data");
             }
-            if (!GetMode.KEYS.equals(getMode) || !GetMode.SMEMBERS.equals(getMode)){
+            if (!(GetMode.KEYS.equals(getMode) || GetMode.SMEMBERS.equals(getMode))) {
                 String[] vars = JOrphanUtils.split(getVariableNames(), ",");
                 String[] values = {};
-                if (StringUtils.isNotBlank(delimiter)){
+                if (StringUtils.isNotBlank(delimiter)) {
                     values = JOrphanUtils.split(line, delimiter, false);
                 }
                 if (values.length > 0) {
@@ -135,16 +135,12 @@ public class RedisTotalPreProcessor extends AbstractScopedTestElement implements
                     variable.put(vars[0], "null".equals(line) ? "" : line);
                 }
             }
-            if (result != null){
-                result.setSuccessful(true);
-            }
+            result.setSuccessful(true);
         } catch (Exception e) {
             log.error("redis operation failed", e);
-            if (result != null){
-                result.setSuccessful(false);
-            }
+            result.setSuccessful(false);
         } finally {
-            if (jedis != null){
+            if (jedis != null) {
                 jedis.close();
             }
         }
@@ -159,13 +155,13 @@ public class RedisTotalPreProcessor extends AbstractScopedTestElement implements
     public void testStarted(String host) {
         JedisPoolConfig config = new JedisPoolConfig();
         config.setMaxTotal(getMaxActive());
-        config.setMaxWaitMillis(getMaxWait());
+        config.setMaxWait(Duration.ofMillis(getMaxWait()));
         config.setMaxIdle(getMaxIdle());
         config.setMinIdle(getMinIdle());
         config.setTestOnBorrow(isTestOnBorrow());
         config.setTestOnCreate(false);
         config.setTestWhileIdle(isTestWhileIdle());
-        config.setTimeBetweenEvictionRunsMillis(getTimeBetweenEvictionRunsMillis());
+        config.setTimeBetweenEvictionRuns(Duration.ofMillis(getTimeBetweenEvictionRunsMillis()));
         int port = Protocol.DEFAULT_PORT;
         if (StringUtils.isNotBlank(getPort())) {
             port = Integer.parseInt(getPort());
@@ -255,7 +251,7 @@ public class RedisTotalPreProcessor extends AbstractScopedTestElement implements
         BLOCK((byte) 1),
         GROW((byte) 2);
 
-        private byte value;
+        private final byte value;
 
         WhenExhaustedAction(byte value) {
             this.value = value;

@@ -17,7 +17,7 @@ import java.nio.charset.Charset;
 
 /**
  * @author 林杰炜 linjw
- * @Title token编码采样器
+ *  token编码采样器
  * @Description token编码采样器
  * @date 2019/1/21 15:25
  */

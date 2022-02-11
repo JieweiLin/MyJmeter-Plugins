@@ -16,9 +16,9 @@ import java.util.Set;
 
 /**
  * @author 林杰炜 linjw
- * @Title redis工具类
+ *  redis工具类
  * @Description redis工具类
- * @Copyright 2014-现在 厦门神州鹰掌通家园项目组
+ * 
  * @date 2018/12/18 17:07
  */
 public class RedisUtils {

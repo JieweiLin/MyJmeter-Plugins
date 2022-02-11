@@ -9,7 +9,7 @@ import java.beans.PropertyDescriptor;
 
 /**
  * @author 林杰炜 linjw
- * @Title Ons采样器GUI
+ *  Ons采样器GUI
  * @Description Ons采样器GUI
  * @date 2018/12/17 14:16
  */

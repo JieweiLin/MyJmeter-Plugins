@@ -25,7 +25,7 @@ import java.util.ResourceBundle;
 
 /**
  * @author 林杰炜 linjw
- * @Title redis配置元件
+ *  redis配置元件
  * @Description redis配置元件
  * @date 2018/12/17 14:13
  */
@@ -151,7 +151,7 @@ public class RedisConfig extends ConfigTestElement implements TestBean, LoopIter
         BLOCK((byte) 1),
         GROW((byte) 2);
 
-        private byte value;
+        private final byte value;
 
         private WhenExhaustedAction(byte value) {
             this.value = value;

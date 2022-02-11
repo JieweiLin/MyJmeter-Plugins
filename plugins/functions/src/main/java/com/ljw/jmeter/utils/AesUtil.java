@@ -8,20 +8,21 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 /**
+ * 数据库字段AES加解密
+ *
  * @author 林杰炜 linjw
- * @Title 数据库字段AES加解密
- * @Description 与数据库的AES对应
  * @date 2019-05-31 19:09
  */
 public class AesUtil {
 
     /**
      * 加密(AES加密后转16进制)
+     *
      * @param plainText 明文
      * @param secretKey 密钥
      * @return
      */
-    public static String encrypt(String plainText,String secretKey) {
+    public static String encrypt(String plainText, String secretKey) {
         try {
             byte[] rawKey = Arrays.copyOf(secretKey.getBytes(StandardCharsets.US_ASCII), 16);
             SecretKeySpec secretKeySpec = new SecretKeySpec(rawKey, "AES");
@@ -36,11 +37,12 @@ public class AesUtil {
 
     /**
      * 解密
+     *
      * @param cipherText 密文
-     * @param secretKey 密钥
+     * @param secretKey  密钥
      * @return
      */
-    public static String decrypt(String cipherText,String secretKey) {
+    public static String decrypt(String cipherText, String secretKey) {
         try {
             byte[] encrypted = Hex.decodeHex(cipherText.toLowerCase().toCharArray());
             byte[] rawKey = Arrays.copyOf(secretKey.getBytes(StandardCharsets.US_ASCII), 16);

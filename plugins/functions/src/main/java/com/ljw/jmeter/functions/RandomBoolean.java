@@ -17,18 +17,18 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
+ * 随机True or False
+ *
  * @author 林杰炜 linjw
- * @Title 随机True or False
- * @Description 随机True or False
  * @date 2019/1/16 10:15
  */
 public class RandomBoolean extends AbstractFunction {
     private static final Logger log = LoggerFactory.getLogger(RandomBoolean.class);
-    private static final List<String> desc = Lists.newLinkedList();
+    private static final List<String> DESC = Lists.newLinkedList();
     private static final String KEY = "__RandomBoolean";
 
     static {
-        desc.add(JMeterUtils.getResString("function_name_paropt"));
+        DESC.add(JMeterUtils.getResString("function_name_paropt"));
     }
 
     private CompoundVariable variable = null;
@@ -66,6 +66,6 @@ public class RandomBoolean extends AbstractFunction {
 
     @Override
     public List<String> getArgumentDesc() {
-        return desc;
+        return DESC;
     }
 }

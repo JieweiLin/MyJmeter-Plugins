@@ -29,7 +29,7 @@ import java.util.ResourceBundle;
 
 /**
  * @author 林杰炜 linjw
- * @Title dubbo配置元件
+ *  dubbo配置元件
  * @Description dubbo配置元件
  * @date 2018/12/12 17:13
  */
@@ -172,10 +172,10 @@ public class DubboConfig extends ConfigTestElement implements TestBean, LoopIter
         //do nothing
     }
 
-    protected static final String[] registryProtocols = new String[]{"none", "zookeeper", "multicast", "redis", "simple"};
-    protected static final String[] rpcProtocols = new String[]{"dubbo", "hessian", "webservice", "memcached", "rpcredis"};
-    protected static final String[] consumerAsyncs = new String[]{"async", "sync"};
-    protected static final String[] consumerLoadbalance = new String[]{"random", "roundrobin", "leastactive", "consistenthash"};
+    protected static final String[] REGISTRY_PROTOCOLS = new String[]{"none", "zookeeper", "multicast", "redis", "simple"};
+    protected static final String[] RPC_PROTOCOLS = new String[]{"dubbo", "hessian", "webservice", "memcached", "rpcredis"};
+    protected static final String[] CONSUMER_ASYNC = new String[]{"async", "sync"};
+    protected static final String[] CONSUMER_LOADBALANCER = new String[]{"random", "roundrobin", "leastactive", "consistenthash"};
 
     @Override
     public void setProperty(JMeterProperty property) {
@@ -186,7 +186,7 @@ public class DubboConfig extends ConfigTestElement implements TestBean, LoopIter
                 try {
                     final BeanInfo beanInfo = Introspector.getBeanInfo(this.getClass());
                     final ResourceBundle rb = (ResourceBundle) beanInfo.getBeanDescriptor().getValue(GenericTestBeanCustomizer.RESOURCE_BUNDLE);
-                    for (String protocol : registryProtocols) {
+                    for (String protocol : REGISTRY_PROTOCOLS) {
                         if (objValue.equals(rb.getString(protocol))) {
                             ((StringProperty) property).setValue(protocol);
                             super.setProperty(property);
@@ -201,7 +201,7 @@ public class DubboConfig extends ConfigTestElement implements TestBean, LoopIter
                 try {
                     final BeanInfo beanInfo = Introspector.getBeanInfo(this.getClass());
                     final ResourceBundle rb = (ResourceBundle) beanInfo.getBeanDescriptor().getValue(GenericTestBeanCustomizer.RESOURCE_BUNDLE);
-                    for (String protocol : rpcProtocols) {
+                    for (String protocol : RPC_PROTOCOLS) {
                         if (objValue.equals(rb.getString(protocol))) {
                             ((StringProperty) property).setValue(protocol);
                             super.setProperty(property);
@@ -216,7 +216,7 @@ public class DubboConfig extends ConfigTestElement implements TestBean, LoopIter
                 try {
                     final BeanInfo beanInfo = Introspector.getBeanInfo(this.getClass());
                     final ResourceBundle rb = (ResourceBundle) beanInfo.getBeanDescriptor().getValue(GenericTestBeanCustomizer.RESOURCE_BUNDLE);
-                    for (String protocol : consumerAsyncs) {
+                    for (String protocol : CONSUMER_ASYNC) {
                         if (objValue.equals(rb.getString(protocol))) {
                             ((StringProperty) property).setValue(rb.getString(protocol));
                             super.setProperty(property);
@@ -231,7 +231,7 @@ public class DubboConfig extends ConfigTestElement implements TestBean, LoopIter
                 try {
                     final BeanInfo beanInfo = Introspector.getBeanInfo(this.getClass());
                     final ResourceBundle rb = (ResourceBundle) beanInfo.getBeanDescriptor().getValue(GenericTestBeanCustomizer.RESOURCE_BUNDLE);
-                    for (String protocol : consumerLoadbalance) {
+                    for (String protocol : CONSUMER_LOADBALANCER) {
                         if (objValue.equals(rb.getString(protocol))) {
                             ((StringProperty) property).setValue(protocol);
                             super.setProperty(property);

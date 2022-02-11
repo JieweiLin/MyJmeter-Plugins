@@ -11,9 +11,9 @@ import java.util.concurrent.ExecutionException;
 
 /**
  * @author 林杰炜 linjw
- * @Title Memcache工具类
+ *  Memcache工具类
  * @Description Memcache工具类
- * @Copyright 2014-现在 厦门神州鹰掌通家园项目组
+ * 
  * @date 2019/1/17 16:38
  */
 public class MemcacheUtils {

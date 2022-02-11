@@ -2,7 +2,7 @@ package com.ljw.jmeter.plugin.dubbo.common;
 
 /**
  * @author 林杰炜 linjw
- * @Title dubbo结果集
+ *  dubbo结果集
  * @Description dubbo结果集
  * @date 2018/12/14 17:21
  */

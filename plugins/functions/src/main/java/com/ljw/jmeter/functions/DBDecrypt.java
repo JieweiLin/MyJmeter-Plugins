@@ -16,9 +16,9 @@ import java.util.Collection;
 import java.util.List;
 
 /**
+ * 数据库字段解密
+ *
  * @author 林杰炜 linjw
- * @Title 数据库字段解密
- * @Description 数据库字段解密
  * @date 2019/6/13 10:08
  */
 public class DBDecrypt extends AbstractFunction {

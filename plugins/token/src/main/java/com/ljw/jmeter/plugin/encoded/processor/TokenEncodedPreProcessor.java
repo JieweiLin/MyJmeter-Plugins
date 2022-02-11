@@ -15,7 +15,7 @@ import java.io.Serializable;
 
 /**
  * @author 林杰炜 linjw
- * @Title token编码前置处理器
+ *  token编码前置处理器
  * @Description token编码前置处理器
  * @date 2019/1/22 16:32
  */

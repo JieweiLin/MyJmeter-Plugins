@@ -18,7 +18,7 @@ import java.util.Objects;
 
 /**
  * @author 林杰炜 linjw
- * @Title token工具类
+ *  token工具类
  * @Description token工具类
  * @date 2019/1/21 15:50
  */
@@ -39,7 +39,7 @@ public class TokenUtils {
     public static String createToken(String data, String tokenSecret, AlgorithmEnum algorithm) {
         Payload payload = JsonUtils.readValue(data, Payload.class);
         Map<String, Object> headerClaims = Maps.newHashMap();
-        headerClaims.put("alg", Constants.algorithmMap.get(algorithm.getValue()));
+        headerClaims.put("alg", Constants.ALGORITHM_MAP.get(algorithm.getValue()));
         headerClaims.put("typ", "JWT");
         String token = JWT.create()
                 .withHeader(headerClaims)

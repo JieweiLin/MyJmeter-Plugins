@@ -10,7 +10,7 @@ import java.beans.PropertyDescriptor;
 
 /**
  * @author 林杰炜 linjw
- * @Title redis采样器Gui
+ *  redis采样器Gui
  * @Description redis采样器Gui
  * @date 2018/12/17 17:48
  */

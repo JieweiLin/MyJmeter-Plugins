@@ -23,7 +23,7 @@ import java.io.Serializable;
 
 /**
  * @author 林杰炜 linjw
- * @Title Mns采样器
+ *  Mns采样器
  * @Description Mns采样器
  * @date 2018/12/5 13:57
  */

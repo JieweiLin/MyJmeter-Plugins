@@ -9,7 +9,7 @@ import java.beans.PropertyDescriptor;
 
 /**
  * @author 林杰炜 linjw
- * @Title dubbo采样器Gui
+ *  dubbo采样器Gui
  * @Description dubbo采样器Gui
  * @date 2018/12/14 17:28
  */

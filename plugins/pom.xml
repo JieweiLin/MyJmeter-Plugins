@@ -17,6 +17,4 @@
         <module>kafka</module>
     </modules>
     <packaging>pom</packaging>
-
-
 </project>

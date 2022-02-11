@@ -8,7 +8,7 @@ import java.beans.PropertyDescriptor;
 
 /**
  * @author 林杰炜 linjw
- * @Title dubbo配置元件Gui
+ *  dubbo配置元件Gui
  * @Description dubbo配置元件Gui
  * @date 2018/12/12 17:14
  */
@@ -42,10 +42,10 @@ public class DubboConfigBeanInfo extends BeanInfoSupport {
 
             createPropertyGroup("registry_group", new String[]{DUBBO_REGISTRY_PROTOCOL, DUBBO_ADDRESS});
             p = property(DUBBO_REGISTRY_PROTOCOL);
-            p.setValue(DEFAULT, DubboConfig.registryProtocols[1]);
+            p.setValue(DEFAULT, DubboConfig.REGISTRY_PROTOCOLS[1]);
             p.setValue(NOT_UNDEFINED, Boolean.TRUE);
             p.setValue(NOT_OTHER, Boolean.TRUE);
-            p.setValue(TAGS, DubboConfig.registryProtocols);
+            p.setValue(TAGS, DubboConfig.REGISTRY_PROTOCOLS);
 
             p = property(DUBBO_ADDRESS);
             p.setValue(NOT_UNDEFINED, Boolean.TRUE);
@@ -53,10 +53,10 @@ public class DubboConfigBeanInfo extends BeanInfoSupport {
 
             createPropertyGroup("rpc_protocol_group", new String[]{DUBBO_RPC_PROTOCOL});
             p = property(DUBBO_RPC_PROTOCOL);
-            p.setValue(DEFAULT, DubboConfig.rpcProtocols[0]);
+            p.setValue(DEFAULT, DubboConfig.RPC_PROTOCOLS[0]);
             p.setValue(NOT_UNDEFINED, Boolean.TRUE);
             p.setValue(NOT_OTHER, Boolean.TRUE);
-            p.setValue(TAGS, DubboConfig.rpcProtocols);
+            p.setValue(TAGS, DubboConfig.RPC_PROTOCOLS);
 
             createPropertyGroup("consumer_group", new String[]{DUBBO_TIMEOUT, DUBBO_VERSION, DUBBO_RETRIES, DUBBO_CLUSTER, DUBBO_GROUP, DUBBO_CONNECTIONS, DUBBO_ASYNC, DUBBO_LOADBALANCE});
             p = property(DUBBO_TIMEOUT);
@@ -84,16 +84,16 @@ public class DubboConfigBeanInfo extends BeanInfoSupport {
             p.setValue(DEFAULT, "1");
 
             p = property(DUBBO_ASYNC);
-            p.setValue(DEFAULT, DubboConfig.consumerAsyncs[1]);
+            p.setValue(DEFAULT, DubboConfig.CONSUMER_ASYNC[1]);
             p.setValue(NOT_UNDEFINED, Boolean.TRUE);
             p.setValue(NOT_OTHER, Boolean.TRUE);
-            p.setValue(TAGS, DubboConfig.consumerAsyncs);
+            p.setValue(TAGS, DubboConfig.CONSUMER_ASYNC);
 
             p = property(DUBBO_LOADBALANCE);
-            p.setValue(DEFAULT, DubboConfig.consumerLoadbalance[0]);
+            p.setValue(DEFAULT, DubboConfig.CONSUMER_LOADBALANCER[0]);
             p.setValue(NOT_UNDEFINED, Boolean.TRUE);
             p.setValue(NOT_OTHER, Boolean.TRUE);
-            p.setValue(TAGS, DubboConfig.consumerLoadbalance);
+            p.setValue(TAGS, DubboConfig.CONSUMER_LOADBALANCER);
 
             createPropertyGroup("interface_group", new String[]{DUBBO_INTERFACE});
             p = property(DUBBO_INTERFACE);

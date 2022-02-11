@@ -16,8 +16,9 @@ import java.util.Collection;
 import java.util.List;
 
 /**
+ * ALiYun 密钥加密
+ *
  * @author linjw
- * @Title ALiYun 密钥加密
  * @date 2020/3/16 13:49
  */
 public class ALiYunKeyEncrypt extends AbstractFunction {

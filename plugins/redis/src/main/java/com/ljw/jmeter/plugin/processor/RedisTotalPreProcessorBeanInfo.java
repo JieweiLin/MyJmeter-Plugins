@@ -10,9 +10,9 @@ import java.beans.PropertyDescriptor;
 
 /**
  * @author 林杰炜 linjw
- * @Title TODO 类描述
- * @Description TODO 详细描述
- * @Copyright 2014-现在 厦门神州鹰掌通家园项目组
+ *  TODO 类描述
+ * 
+ *
  * @date 2019/5/23 16:22
  */
 public class RedisTotalPreProcessorBeanInfo extends BeanInfoSupport {

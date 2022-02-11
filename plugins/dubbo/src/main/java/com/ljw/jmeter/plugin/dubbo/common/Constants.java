@@ -2,20 +2,24 @@ package com.ljw.jmeter.plugin.dubbo.common;
 
 /**
  * @author 林杰炜 linjw
- * @Title 常量类
+ *  常量类
  * @Description 常量类
  * @date 2018/12/13 13:41
  */
 public class Constants {
 
-    //Registry Protocol
+    /**
+     * Registry Protocol
+     */
     public static final String REGISTRY_NONE = "none";
     public static final String REGISTRY_ZOOKEEPER = "zookeeper";
     public static final String REGISTRY_MULTICAST = "multicast";
     public static final String REGISTRY_REDIS = "redis";
     public static final String REGISTRY_SIMPLE = "simple";
 
-    //RPC Protocol
+    /**
+     * RPC Protocol
+     */
     public static final String RPC_PROTOCOL_DUBBO = "dubbo";
     public static final String RPC_PROTOCOL_RMI = "rmi";
     public static final String RPC_PROTOCOL_HESSIAN = "hessian";

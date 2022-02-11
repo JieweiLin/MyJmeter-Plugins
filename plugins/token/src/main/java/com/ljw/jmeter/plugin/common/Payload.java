@@ -2,7 +2,7 @@ package com.ljw.jmeter.plugin.common;
 
 /**
  * @author 林杰炜 linjw
- * @Title token中的payload实体
+ *  token中的payload实体
  * @Description token中的payload实体
  * @date 2019/1/19 17:29
  */

@@ -13,26 +13,26 @@ import java.util.List;
 
 /**
  * @author 林杰炜 linjw
- * @Title Json工具类
+ *  Json工具类
  * @Description Json工具类
  * @date 2018/12/14 17:07
  */
 public class JsonUtils {
     private static final Logger log = LoggerFactory.getLogger(JsonUtils.class);
 
-    private static final Gson gson = new GsonBuilder().serializeNulls().create();
+    private static final Gson GSON = new GsonBuilder().serializeNulls().create();
 
     public static String toJson(Object obj) {
-        return gson.toJson(obj);
+        return GSON.toJson(obj);
     }
 
     public static String toJson(Object obj, Type type) {
-        return gson.toJson(obj, type);
+        return GSON.toJson(obj, type);
     }
 
     public static <T> T fromJson(String json, Class<T> tClass) {
         try {
-            return gson.fromJson(json, tClass);
+            return GSON.fromJson(json, tClass);
         } catch (JsonSyntaxException e) {
             log.error("json to class[{}] is error!", tClass.getName(), e);
         }
@@ -41,7 +41,7 @@ public class JsonUtils {
 
     public static <T> T fromJson(String json, Type type) {
         try {
-            return gson.fromJson(json, type);
+            return GSON.fromJson(json, type);
         } catch (JsonSyntaxException e) {
             log.error("json to class[{}] is error!", type.getClass().getName(), e);
         }

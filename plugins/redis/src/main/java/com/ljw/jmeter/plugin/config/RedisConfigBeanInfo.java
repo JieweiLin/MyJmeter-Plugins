@@ -9,7 +9,7 @@ import java.beans.PropertyDescriptor;
 
 /**
  * @author 林杰炜 linjw
- * @Title redis配置元件gui
+ *  redis配置元件gui
  * @Description redis配置元件gui
  * @date 2018/12/17 14:13
  */

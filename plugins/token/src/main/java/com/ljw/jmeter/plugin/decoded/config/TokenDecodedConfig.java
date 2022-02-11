@@ -15,7 +15,7 @@ import java.util.Objects;
 
 /**
  * @author 林杰炜 linjw
- * @Title Token解码配置元件
+ *  Token解码配置元件
  * @Description Token解码配置元件
  * @date 2019/1/21 10:36
  */

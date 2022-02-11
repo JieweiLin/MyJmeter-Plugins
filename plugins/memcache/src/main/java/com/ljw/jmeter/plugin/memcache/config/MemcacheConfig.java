@@ -23,7 +23,7 @@ import java.util.Objects;
 
 /**
  * @author 林杰炜 linjw
- * @Title Memcache配置元件
+ *  Memcache配置元件
  * @Description Memcache配置元件
  * @date 2018/11/29 16:52
  */

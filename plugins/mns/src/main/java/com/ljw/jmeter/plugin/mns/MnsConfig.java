@@ -19,7 +19,7 @@ import java.util.Objects;
 
 /**
  * @author 林杰炜 linjw
- * @Title Mns配置元件
+ *  Mns配置元件
  * @Description Mns配置元件
  * @date 2018/12/5 13:43
  */

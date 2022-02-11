@@ -10,7 +10,7 @@ import java.beans.PropertyDescriptor;
 
 /**
  * @author 林杰炜 linjw
- * @Title Memcache采样器GUI
+ *  Memcache采样器GUI
  * @Description Memcache采样器GUI
  * @date 2018/11/29 18:48
  */

@@ -15,24 +15,26 @@ import java.util.Collection;
 import java.util.List;
 
 /**
+ * 计算MD5值
+ *
  * @author 林杰炜 linjw
- * @Title 计算MD5值
- * @Description 计算MD5值
  * @date 2019/1/17 15:50
  */
 public class MD5 extends AbstractFunction {
-    private static final List<String> desc = Lists.newLinkedList();
+    private static final List<String> DESC = Lists.newLinkedList();
     private static final String KEY = "__MD5";
+
     static {
-        desc.add("String to calculate MD5 hash");
-        desc.add("Name of variable in which to store the result (optional)");
+        DESC.add("String to calculate MD5 hash");
+        DESC.add("Name of variable in which to store the result (optional)");
     }
+
     private Object[] values;
 
     @Override
     public String execute(SampleResult sampleResult, Sampler sampler) throws InvalidVariableException {
         JMeterVariables variables = getVariables();
-        String str = ((CompoundVariable)values[0]).execute();
+        String str = ((CompoundVariable) values[0]).execute();
         MessageDigest digest;
         try {
             digest = MessageDigest.getInstance("md5");
@@ -40,8 +42,8 @@ public class MD5 extends AbstractFunction {
             return "Error creating digest: " + e;
         }
         String result = JOrphanUtils.baToHexString(digest.digest(str.getBytes()));
-        if (values.length > 1){
-            variables.put(((CompoundVariable)values[1]).execute().trim(), result);
+        if (values.length > 1) {
+            variables.put(((CompoundVariable) values[1]).execute().trim(), result);
         }
         return result;
     }
@@ -59,6 +61,6 @@ public class MD5 extends AbstractFunction {
 
     @Override
     public List<String> getArgumentDesc() {
-        return desc;
+        return DESC;
     }
 }

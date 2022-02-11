@@ -8,7 +8,7 @@ import java.beans.PropertyDescriptor;
 
 /**
  * @author 林杰炜 linjw
- * @Title Memcache配置元件GUI
+ *  Memcache配置元件GUI
  * @Description Memcache配置元件GUI
  * @date 2018/11/29 17:05
  */

@@ -19,7 +19,7 @@ import java.util.Properties;
 
 /**
  * @author 林杰炜 linjw
- * @Title Ons配置元件
+ *  Ons配置元件
  * @Description Ons配置元件
  * @date 2018/12/6 10:54
  */

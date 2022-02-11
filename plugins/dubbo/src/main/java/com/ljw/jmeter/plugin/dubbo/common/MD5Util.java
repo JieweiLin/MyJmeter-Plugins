@@ -9,7 +9,7 @@ import java.security.NoSuchAlgorithmException;
  */
 public class MD5Util {
     private static MessageDigest md;
-    private static final char[] hexCode = "0123456789ABCDEF".toCharArray();
+    private static final char[] HEX_CODE = "0123456789ABCDEF".toCharArray();
 
     static {
         try {
@@ -19,15 +19,15 @@ public class MD5Util {
         }
     }
 
-    public static String MD5_16bit(String input) {
-        String hash = MD5_32bit(input);
+    public static String MD516Bit(String input) {
+        String hash = MD532Bit(input);
         if (hash == null) {
             return null;
         }
         return hash.substring(8, 24);
     }
 
-    public static String MD5_32bit(String input) {
+    public static String MD532Bit(String input) {
         if (input == null || input.length() == 0) {
             return null;
         }
@@ -39,8 +39,8 @@ public class MD5Util {
     private static String convertToString(byte[] data) {
         StringBuilder r = new StringBuilder(data.length * 2);
         for (byte b : data) {
-            r.append(hexCode[(b >> 4) & 0xF]);
-            r.append(hexCode[(b & 0xF)]);
+            r.append(HEX_CODE[(b >> 4) & 0xF]);
+            r.append(HEX_CODE[(b & 0xF)]);
         }
         return r.toString();
     }

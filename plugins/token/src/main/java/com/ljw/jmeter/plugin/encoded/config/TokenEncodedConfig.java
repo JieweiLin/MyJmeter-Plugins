@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @author 林杰炜 linjw
- * @Title token编码配置元件
+ *  token编码配置元件
  * @Description token编码配置元件
  * @date 2019/1/19 17:07
  */
